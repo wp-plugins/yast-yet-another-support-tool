@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.0.0
+  Version: 1.0.1
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -26,7 +26,7 @@ class YAST_class {
     public $options;
 
     function YAST_class() {
-	load_plugin_textdomain('yast', false, 'yast/languages');
+	load_plugin_textdomain('yast', false, 'yast-yet-another-support-tool/languages');
 	$this->mailid = '';
 	$this->mailpriority = '';
 	$this->mailfrom = '';

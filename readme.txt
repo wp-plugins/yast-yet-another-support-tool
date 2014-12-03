@@ -98,6 +98,9 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.0.1 =
+* Fix localization path
+
 = 1.0.0 =
 * Initial release
 
