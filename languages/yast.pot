@@ -1,0 +1,402 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bug Tickets\n"
+"POT-Creation-Date: 2013-10-30 01:09+0100\n"
+"PO-Revision-Date: 2013-10-30 01:09+0100\n"
+"Last-Translator: Bastien Ho <bastienho@urbancube.fr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: ../bug-tickets.php:43 ../bug-tickets.php:288 ../bug-tickets.php:390
+msgid "Open"
+msgstr ""
+
+#: ../bug-tickets.php:51 ../bug-tickets.php:289 ../bug-tickets.php:391
+msgid "Closed"
+msgstr ""
+
+#: ../bug-tickets.php:59
+msgid "Bug"
+msgstr ""
+
+#: ../bug-tickets.php:72 ../bug-tickets.php:74
+msgid "bugs"
+msgstr ""
+
+#: ../bug-tickets.php:73
+msgid "bug"
+msgstr ""
+
+#: ../bug-tickets.php:75
+msgid "Add"
+msgstr ""
+
+#: ../bug-tickets.php:76
+msgid "Edit"
+msgstr ""
+
+#: ../bug-tickets.php:77
+msgid "Edit bug"
+msgstr ""
+
+#: ../bug-tickets.php:78
+msgid "New bug"
+msgstr ""
+
+#: ../bug-tickets.php:79
+msgid "View"
+msgstr ""
+
+#: ../bug-tickets.php:80
+msgid "Preview bug"
+msgstr ""
+
+#: ../bug-tickets.php:81
+msgid "Search a bug"
+msgstr ""
+
+#: ../bug-tickets.php:82
+msgid "No entry has been made"
+msgstr ""
+
+#: ../bug-tickets.php:83
+msgid "No bug Found in Trash"
+msgstr ""
+
+#: ../bug-tickets.php:84
+msgid "Parent bug"
+msgstr ""
+
+#: ../bug-tickets.php:100
+msgid "bugtypes"
+msgstr ""
+
+#: ../bug-tickets.php:101
+msgid "bugtype"
+msgstr ""
+
+#: ../bug-tickets.php:102
+msgid "Search bugtype"
+msgstr ""
+
+#: ../bug-tickets.php:103
+msgid "All bugtypes"
+msgstr ""
+
+#: ../bug-tickets.php:104 ../bug-tickets.php:105
+msgid "bugtype parent"
+msgstr ""
+
+#: ../bug-tickets.php:106
+msgid "Edit bugtype"
+msgstr ""
+
+#: ../bug-tickets.php:107
+msgid "Update bugtype"
+msgstr ""
+
+#: ../bug-tickets.php:108
+msgid "Add new bugtype"
+msgstr ""
+
+#: ../bug-tickets.php:109
+msgid "New bugtype"
+msgstr ""
+
+#: ../bug-tickets.php:110
+msgid "bug types"
+msgstr ""
+
+#: ../bug-tickets.php:119
+msgid "Ticket have been re-open"
+msgstr ""
+
+#: ../bug-tickets.php:122
+msgid "Ticket have been closed"
+msgstr ""
+
+#: ../bug-tickets.php:127 ../bug-tickets.php:285 ../bug-tickets.php:733
+msgid "Bug tickets"
+msgstr ""
+
+#: ../bug-tickets.php:128
+msgid "Options"
+msgstr ""
+
+#: ../bug-tickets.php:141
+msgid "Security error"
+msgstr ""
+
+#: ../bug-tickets.php:168
+msgid "Bug ticket"
+msgstr ""
+
+#: ../bug-tickets.php:171
+msgid "Back to bug tickets list"
+msgstr ""
+
+#: ../bug-tickets.php:175
+msgid "Informations"
+msgstr ""
+
+#: ../bug-tickets.php:181
+msgid "Replies"
+msgstr ""
+
+#: ../bug-tickets.php:207
+msgid "Close this ticket ?"
+msgstr ""
+
+#: ../bug-tickets.php:231
+msgid "Re-open this ticket ?"
+msgstr ""
+
+#: ../bug-tickets.php:235
+msgid "Reply to this ticket"
+msgstr ""
+
+#: ../bug-tickets.php:238
+msgid "Send"
+msgstr ""
+
+#: ../bug-tickets.php:245 ../bug-tickets.php:402
+msgid "Technical details"
+msgstr ""
+
+#: ../bug-tickets.php:287
+msgid "All"
+msgstr ""
+
+#: ../bug-tickets.php:290
+msgid "Trash"
+msgstr ""
+
+#: ../bug-tickets.php:296
+msgid "Title"
+msgstr ""
+
+#: ../bug-tickets.php:297
+msgid "Type"
+msgstr ""
+
+#: ../bug-tickets.php:298
+msgid "Page"
+msgstr ""
+
+#: ../bug-tickets.php:299
+msgid "Priority"
+msgstr ""
+
+#: ../bug-tickets.php:300
+msgid "User"
+msgstr ""
+
+#: ../bug-tickets.php:301
+msgid "Date"
+msgstr ""
+
+#: ../bug-tickets.php:302
+msgid "Answers"
+msgstr ""
+
+#: ../bug-tickets.php:303 ../bug-tickets.php:365
+msgid "Status"
+msgstr ""
+
+#: ../bug-tickets.php:335
+msgid "Low"
+msgstr ""
+
+#: ../bug-tickets.php:336
+msgid "Normal"
+msgstr ""
+
+#: ../bug-tickets.php:337
+msgid "High"
+msgstr ""
+
+#: ../bug-tickets.php:338
+msgid "Critical"
+msgstr ""
+
+#: ../bug-tickets.php:366
+msgid "Level"
+msgstr ""
+
+#: ../bug-tickets.php:388
+msgid "Status:"
+msgstr ""
+
+#: ../bug-tickets.php:401
+msgid "Description"
+msgstr ""
+
+#: ../bug-tickets.php:423
+msgid "System:"
+msgstr ""
+
+#: ../bug-tickets.php:424
+msgid "Browser:"
+msgstr ""
+
+#: ../bug-tickets.php:430
+msgid "Assigned to:"
+msgstr ""
+
+#: ../bug-tickets.php:442
+msgid "Environment"
+msgstr ""
+
+#: ../bug-tickets.php:443
+msgid "User Agent:"
+msgstr ""
+
+#: ../bug-tickets.php:449
+msgid "Case URL"
+msgstr ""
+
+#: ../bug-tickets.php:455
+msgid "No POST variables"
+msgstr ""
+
+#: ../bug-tickets.php:470
+msgid "Bug-Tickets options saved !"
+msgstr ""
+
+#: ../bug-tickets.php:477
+msgid "Bug Tickets Options"
+msgstr ""
+
+#: ../bug-tickets.php:479
+msgid "Alerts"
+msgstr ""
+
+#: ../bug-tickets.php:482
+msgid "Send email alert to:"
+msgstr ""
+
+#: ../bug-tickets.php:486
+msgid "Remote ticket server"
+msgstr ""
+
+#: ../bug-tickets.php:489
+msgid "Remote server"
+msgstr ""
+
+#: ../bug-tickets.php:495
+msgid "Remote token"
+msgstr ""
+
+#: ../bug-tickets.php:501
+msgid "Local token"
+msgstr ""
+
+#: ../bug-tickets.php:506
+msgid "Apply settings"
+msgstr ""
+
+#: ../bug-tickets.php:560
+msgid "An error occured !"
+msgstr ""
+
+#: ../bug-tickets.php:586
+#, php-format
+msgid ""
+"New bug report from %1$s (%2$s)\n"
+"\t\t  \n"
+"Subject: %3$s\n"
+"Type : %4$s\n"
+"Priority : %5$s\n"
+"\n"
+"Message:\n"
+"%6$s\n"
+"\n"
+"---------------------------\n"
+"Technical informations :\n"
+"* Time: %7$s\n"
+"* URL: %8$s\n"
+"* Variables: %9$s\n"
+"* Navigator: %10$s\n"
+"\n"
+"Regards,\n"
+"The website %11$s\n"
+"\n"
+"Issue link : %12$s"
+msgstr ""
+
+#: ../bug-tickets.php:622
+#, php-format
+msgid "Bug report #%d"
+msgstr ""
+
+#: ../bug-tickets.php:627
+msgid "Report succesfully sent !"
+msgstr ""
+
+#: ../bug-tickets.php:648
+#, php-format
+msgid "Hi %s! Did you find a problem ?"
+msgstr ""
+
+#: ../bug-tickets.php:651
+msgid "Priority:"
+msgstr ""
+
+#: ../bug-tickets.php:663
+msgid "Report type:"
+msgstr ""
+
+#: ../bug-tickets.php:673
+msgid "Describe the bug:"
+msgstr ""
+
+#: ../bug-tickets.php:676
+msgid "Title:"
+msgstr ""
+
+#: ../bug-tickets.php:682
+msgid "Description:"
+msgstr ""
+
+#: ../bug-tickets.php:687
+msgid "Technical details:"
+msgstr ""
+
+#: ../bug-tickets.php:688
+msgid "These informations will be sent with your report:"
+msgstr ""
+
+#: ../bug-tickets.php:691
+msgid "Page URL:"
+msgstr ""
+
+#: ../bug-tickets.php:697
+msgid "Variables:"
+msgstr ""
+
+#: ../bug-tickets.php:703
+msgid "Navigator:"
+msgstr ""
+
+#: ../bug-tickets.php:709
+msgid "Submit"
+msgstr ""
+
+#: ../bug-tickets.php:710
+msgid "Cancel"
+msgstr ""
+
+#: ../bug-tickets.php:738 ../bug-tickets.php:743
+msgid "Report a bug here !"
+msgstr ""
+
+#: ../bug-tickets.php:741
+msgid "Contact technical support"
+msgstr ""

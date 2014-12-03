@@ -1,0 +1,281 @@
+
+
+.yast_alert{
+    border:#9CA 1px solid;
+    padding:1em;
+    background:#EFE;
+    color:#383;
+}
+
+.yast_formbutton input, .yast_icon{
+    font:400 15px/1 dashicons !important;
+    padding:0;
+    border:none;
+    background:none;
+}
+
+.yast_icon-private{
+    color:#C95;
+}
+.yast_delete input[type=submit]{
+    color:#333;
+}
+.yast_delete input[type=submit]:hover{
+    color:#900;
+}
+
+
+
+#report_ticketbox{
+    display:none;
+}
+#report_ticketform h3{
+    font-weight: 900;
+}
+#TB_window #report_ticketform textarea,#TB_window #report_ticketform input[type=text]{
+    width: 100%;
+}
+#yast_techsub{
+    cursor:pointer;
+}
+#yast_techsub p{
+    text-decoration: underline;
+    font-style: italic;
+    color:#06C;
+}
+/***********************/
+.yast_user{
+    font-weight: 800;
+}
+.yast_delimit{
+    font-weight: 100;
+    font-size:0.8em;
+}
+.yast_server{
+    font-weight: 100;
+    font-size:0.9em;
+    font-style:italic;
+}
+/***********************/
+
+#ticket_content .ticket_description{
+    background:#F8F8F8;
+    background:rgba(255,255,255,0.2);
+    border:#CCC 1px solid;
+    border-color:rgba(200,200,200,0.2);
+    border-radius:3px;
+    font-size:1.3em;
+    padding:0.5em;
+}
+#ticket_content #ticket_priority{
+    font-weight:900;
+}
+.yast_ticket_navigator ul{
+    display:table;
+}
+.yast_ticket_navigator li{
+    float:left;
+    margin:0.3em;
+    padding:0.3em;
+    background:#DDD;
+    color:#333;
+    border-radius:3px;
+}
+
+
+
+
+#yast_assigned, #yast_reassigne{
+    display:none;
+}
+/*****************************/
+#yasts_list tr td{
+    border-bottom:#E3E3E3 0.5px solid;
+}
+#yasts_list tr td:last-child{
+    text-align: right;
+}
+
+.yast_trash td{
+    color:#666;
+}
+.yast_auto-draft td{
+    color:#999;
+}
+
+.yast_private td{
+}
+
+.yast_active td{
+    font-weight:500;
+}
+.yast_waiting td{
+    font-weight:900;
+}
+.yast_closed td{
+    opacity:0.7;
+    font-weight:100;
+}
+
+/****************************/
+
+#icon-yast{
+    background-image:url(../img/ticket.png);
+}
+#wp-admin-bar-ticket_tickets .ab-icon{
+    background-image:url(../img/ticket-bar.png);
+}
+
+/*****************************/
+#yast_comment, #ticket_comments .comment-reply-link, #ticket_comments .comment-edit-link{
+    display:none;
+}
+#ticket_comments li.comment{
+    padding:0.6em;
+    margin:0;
+}
+#ticket_comments li time, #ticket_comments li .commentmetadata{
+    float:right;
+}
+
+
+/************************/
+#ticket_tech h5{
+    margin:6px 0 0;
+}
+#ticket_tech p{
+    margin:3px 0;
+}
+#ticket_preview_iframe{
+    height:10px;
+}
+.yast_actions, .yast_actions form{
+    display:inline;
+}
+#yasts_list .yast_actions input{
+    font-size:0.7em;
+}
+/*
+.yast-device span,.yast-os span,.yast-browser span{
+    border-radius:5px;
+    background:#EFEFEF;
+}
+.yast-browser.firefox span{
+    background:#FF9900;
+}
+.yast-browser.opera span{
+    background:#CC0000;
+}
+.yast-browser.safari span{
+    background:#0AC0EC;
+}
+.yast-browser.chrome span{
+    background:#FFD401;
+}
+.yast-browser.ie span{
+    background:#1179E4;
+    color:#FFF;
+}*/
+.yast-public .dashicons,.yast-public .dashicons,.yast-public .dashicons{
+    color:#FFF;
+}
+
+.yast-level-0 span{
+    color:#DC0;
+}
+.yast-level-1 span{
+    color:#F90;
+}
+.yast-level-2 span{
+    color:#930;
+}
+.yast-level-3 span{
+    color:#F00;
+}
+/*
+ Icons: from http://icomoon.io under GPL / CC BY 3.0 licences
+*/
+@font-face {
+  font-family: 'yast-icomoon';
+  src: url('../font/yast-icomoon.eot?47254334');
+  src: url('../font/yast-icomoon.eot?47254334#iefix') format('embedded-opentype'),
+       url('../font/yast-icomoon.woff?47254334') format('woff'),
+       url('../font/yast-icomoon.ttf?47254334') format('truetype'),
+       url('../font/yast-icomoon.svg?47254334#yast-icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'yast-icomoon';
+    src: url('../font/yast-icomoon.svg?47254334#yast-icomoon') format('svg');
+  }
+}
+*/
+
+ [class^="icon-yast-"]:before, [class*=" icon-yast-"]:before,
+#adminmenu #toplevel_page_yast_list .menu-icon-generic div.wp-menu-image:before,
+#wpadminbar #wp-admin-bar-yast_support_tickets .ab-icon:before
+ {
+  font-family: "yast-icomoon";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.icon-yast-chrome:before { content: '\e800'; } /* '' */
+.icon-yast-bug:before { content: '\e801'; } /* '' */
+.icon-yast-linux:before { content: '\e802'; } /* '' */
+.icon-yast-apple:before { content: '\e803'; } /* '' */
+.icon-yast-macos:before { content: '\e803'; } /* '' */
+.icon-yast-android:before { content: '\e804'; } /* '' */
+.icon-yast-windows:before { content: '\e805'; } /* '' */
+.icon-yast-windows8:before { content: '\e806'; } /* '' */
+.icon-yast-mac:before { content: '\e807'; } /* '' */
+.icon-yast-firefox:before { content: '\e808'; } /* '' */
+.icon-yast-ie:before { content: '\e809'; } /* '' */
+.icon-yast-opera:before { content: '\e80a'; } /* '' */
+.icon-yast-safari:before { content: '\e80b'; } /* '' */
+.icon-yast-code:before { content: '\e80c'; } /* '' */
+.icon-yast-desktop:before { content: '\e80d'; } /* '' e80d */
+.icon-yast-tablet:before { content: '\e80e'; } /* '' */
+.icon-yast-mobile:before { content: '\e80f'; } /* '' */
+.icon-yast-laptop:before { content: '\e810'; } /* '' */
+
+
+#adminmenu #toplevel_page_yast_list .menu-icon-generic div.wp-menu-image:before,
+#wpadminbar #wp-admin-bar-yast_support_tickets .ab-icon:before {
+    content: '\e801';
+    top: 1px;
+}
+#wpadminbar #wp-admin-bar-ticket_report .ab-icon:before {
+    content: "";
+    top: 1px;
+}

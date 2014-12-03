@@ -1,0 +1,796 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bug Tickets\n"
+"POT-Creation-Date: 2014-11-28 15:26+0100\n"
+"PO-Revision-Date: 2014-11-28 15:27+0100\n"
+"Last-Translator: Bastien Ho <bastienho@urbancube.fr>\n"
+"Language-Team: bastho <bastienho@urbancube.fr>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: ../yast.php:80 ../yast.php:471 ../yast.php:659
+msgid "Open"
+msgstr "Ouvert"
+
+#: ../yast.php:88 ../yast.php:472 ../yast.php:660
+msgid "Closed"
+msgstr "Cloturé"
+
+#: ../yast.php:96
+msgid "Ticket"
+msgstr "Ticket"
+
+#: ../yast.php:109 ../yast.php:111
+msgid "tickets"
+msgstr "Tickets"
+
+#: ../yast.php:110
+msgid "ticket"
+msgstr "Ticket"
+
+#: ../yast.php:112
+msgid "Add"
+msgstr "Ajouter"
+
+#: ../yast.php:113
+msgid "Edit"
+msgstr "Editer"
+
+#: ../yast.php:114 ../yast.php:253
+msgid "Edit ticket"
+msgstr "Editer le ticket"
+
+#: ../yast.php:115 ../yast.php:482
+msgid "New ticket"
+msgstr "Nouveau Ticket"
+
+#: ../yast.php:116
+msgid "View"
+msgstr "Voir"
+
+#: ../yast.php:117
+msgid "Preview ticket"
+msgstr "prévisualiser le Ticket"
+
+#: ../yast.php:118
+msgid "Search a ticket"
+msgstr "Chercher un ticket"
+
+#: ../yast.php:119
+msgid "No entry has been made"
+msgstr "Aucune entrée"
+
+#: ../yast.php:120
+msgid "No ticket Found in Trash"
+msgstr "La corbeille à tickets est vide"
+
+#: ../yast.php:121
+msgid "Parent ticket"
+msgstr "Tickets parent"
+
+#: ../yast.php:135 ../yast.php:143 ../yast.php:174
+msgid "Ticket types"
+msgstr "Type de tickets"
+
+#: ../yast.php:136
+msgid "Ticket type"
+msgstr "Type de signalement :"
+
+#: ../yast.php:137
+msgid "Search Ticket type"
+msgstr "Chercher un type de ticket"
+
+#: ../yast.php:138
+msgid "All Ticket types"
+msgstr "Tous les types de tickets"
+
+#: ../yast.php:139
+msgid "Edit Ticket type"
+msgstr "Editer le type de ticket"
+
+#: ../yast.php:140
+msgid "Update Ticket type"
+msgstr "Mettre à jour le type de ticket"
+
+#: ../yast.php:141
+msgid "Add new Ticket type"
+msgstr "Nouveau  type de ticket"
+
+#: ../yast.php:142
+msgid "New Ticket type"
+msgstr "Nouveau type de ticket"
+
+#: ../yast.php:161
+msgid "Ticket has been re-open"
+msgstr "Le ticket a été réouvert"
+
+#: ../yast.php:164
+msgid "Ticket has been closed"
+msgstr "Le ticket a été cloturé"
+
+#: ../yast.php:167
+msgid "Ticket has been moved to trash"
+msgstr "Le ticket a été déplacé à la corbeille"
+
+#: ../yast.php:173 ../yast.php:465 ../yast.php:1918
+msgid "Support Tickets"
+msgstr "Tickets Support"
+
+#: ../yast.php:175
+msgid "Options"
+msgstr "Options"
+
+#: ../yast.php:183
+msgid "hour"
+msgstr "heure"
+
+#: ../yast.php:184 ../yast.php:622
+msgid "hours"
+msgstr "heures"
+
+#: ../yast.php:185
+msgid "minute"
+msgstr "minute"
+
+#: ../yast.php:186 ../yast.php:335 ../yast.php:623
+msgid "minutes"
+msgstr "minutes"
+
+#: ../yast.php:187 ../yast.php:238
+msgid "No time lost"
+msgstr "Pas de temps perdu"
+
+#: ../yast.php:190 ../yast.php:191
+msgid "h"
+msgstr "h"
+
+#: ../yast.php:192 ../yast.php:193
+msgid "min"
+msgstr "min"
+
+#: ../yast.php:194 ../yast.php:907
+msgid "None"
+msgstr "Aucun"
+
+#: ../yast.php:235
+#, php-format
+msgid "%s spent on this."
+msgstr "%s passé dessus"
+
+#: ../yast.php:251
+msgid "Support ticket"
+msgstr "Ticket Support"
+
+#: ../yast.php:258
+msgid "Back to support tickets list"
+msgstr "Retour à la liste des tickets support"
+
+#: ../yast.php:262
+msgid "Informations"
+msgstr "Informations"
+
+#: ../yast.php:275
+msgid "Process"
+msgstr "Traiter"
+
+#: ../yast.php:280 ../yast.php:334 ../yast.php:500
+msgid "Spent time"
+msgstr "Temps passé"
+
+#: ../yast.php:311
+msgid "Re-open this ticket ?"
+msgstr "Ré-ouvrir ce ticket ?"
+
+#: ../yast.php:322 ../yast.php:372
+msgid "Close this ticket ?"
+msgstr "Cloturer ce ticket ?"
+
+#: ../yast.php:325
+msgid "Reply to this ticket"
+msgstr "Répondre à ce ticket"
+
+#: ../yast.php:336
+#, php-format
+msgid "For information, you've opened this page %s ago."
+msgstr "Pour information, vous avez ouvert cette page il y a %s."
+
+#: ../yast.php:344
+msgid "Send"
+msgstr "Envoyer"
+
+#: ../yast.php:351 ../yast.php:673
+msgid "Technical details"
+msgstr "Détails techniques"
+
+#: ../yast.php:364
+msgid "Delete this ticket ?"
+msgstr "Supprimer ce ticket ?"
+
+#: ../yast.php:470
+msgid "All"
+msgstr "Tous"
+
+#: ../yast.php:473
+msgid "Trash"
+msgstr "Corbeille"
+
+#: ../yast.php:492
+msgid "Title"
+msgstr "Titre"
+
+#: ../yast.php:493
+msgid "Type"
+msgstr "Type"
+
+#: ../yast.php:494
+msgid "Page"
+msgstr "Page"
+
+#: ../yast.php:495
+msgid "Priority"
+msgstr "Priorité"
+
+#: ../yast.php:496
+msgid "Assigned"
+msgstr "Assigné"
+
+#: ../yast.php:497
+msgid "User"
+msgstr "Utilisat-eur/rice"
+
+#: ../yast.php:498
+msgid "Date"
+msgstr "Date"
+
+#: ../yast.php:499
+msgid "Answers"
+msgstr "Réponses"
+
+#: ../yast.php:501 ../yast.php:632
+msgid "Status"
+msgstr "Status"
+
+#: ../yast.php:502
+msgid "Actions"
+msgstr "Actions"
+
+#: ../yast.php:534 ../yast.php:754 ../yast.php:1824
+msgid "Private"
+msgstr "Privé"
+
+#: ../yast.php:545
+msgid "Close"
+msgstr "Cloturer"
+
+#: ../yast.php:554
+msgid "Re-Open"
+msgstr "Ré-Ouvrir"
+
+#: ../yast.php:563
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ../yast.php:583
+msgid "Low"
+msgstr "Bas"
+
+#: ../yast.php:584
+msgid "Normal"
+msgstr "Normal"
+
+#: ../yast.php:585
+msgid "High"
+msgstr "Haut"
+
+#: ../yast.php:586
+msgid "Critical"
+msgstr "Critique"
+
+#: ../yast.php:624
+msgid "seconds"
+msgstr "secondes"
+
+#: ../yast.php:633
+msgid "Level"
+msgstr "Niveau"
+
+#: ../yast.php:656
+msgid "Status:"
+msgstr "Status :"
+
+#: ../yast.php:664
+msgid "Go back to ticket"
+msgstr "Retourner au ticket"
+
+#: ../yast.php:674
+msgid "Reporter"
+msgstr "Rapport-eur/se"
+
+#: ../yast.php:757 ../yast.php:1823
+msgid "Public"
+msgstr "Publique"
+
+#: ../yast.php:799
+msgid "Merged tickets :"
+msgstr "Tickets fusionnés :"
+
+#: ../yast.php:832
+msgid "Assigned to:"
+msgstr "Assigné à :"
+
+#: ../yast.php:841
+msgid "Assign"
+msgstr "Assigner"
+
+#: ../yast.php:842
+msgid "Change"
+msgstr "Changer"
+
+#: ../yast.php:848
+msgid "Merge with another ticket"
+msgstr "Fusionner avec un autre ticket"
+
+#: ../yast.php:855
+#, php-format
+msgid "Merged with ticket #%d : %s"
+msgstr "Fusionné avec le ticket #%d : %s"
+
+#: ../yast.php:878
+msgid "Environment"
+msgstr "Environement"
+
+#: ../yast.php:879
+msgid "User Agent:"
+msgstr "User agent :"
+
+#: ../yast.php:885
+msgid "Case URL"
+msgstr "URL du cas"
+
+#: ../yast.php:891
+msgid "No POST variables"
+msgstr "Pas de variables POST"
+
+#: ../yast.php:908
+msgid "Open tickets"
+msgstr "Tickets ouverts"
+
+#: ../yast.php:916
+msgid "Closed tickets"
+msgstr "Tickets fermés"
+
+#: ../yast.php:948
+msgid "YAST Support-Tickets options saved !"
+msgstr "Les options de tickets support ont bien été sauvegardées !"
+
+#: ../yast.php:955
+msgid "Support Tickets Options"
+msgstr "Options de tickets support"
+
+#: ../yast.php:958
+msgid "Alerts"
+msgstr "Alertes"
+
+#: ../yast.php:961
+msgid "Send email alert to:"
+msgstr "Envoyer une alerte courriel à :"
+
+#: ../yast.php:965
+msgid "Support Form"
+msgstr "Formulaire de support"
+
+#: ../yast.php:968
+msgid "Ticket type to use in adminbar"
+msgstr "Type de ticket dans la bar d'administration"
+
+#: ../yast.php:982
+msgid "Force SSL"
+msgstr "Forcer SSL"
+
+#: ../yast.php:984
+msgid "No"
+msgstr "Non"
+
+#: ../yast.php:985
+msgid "Yes"
+msgstr "Oui"
+
+#: ../yast.php:990
+msgid "Multisite"
+msgstr "Multisite"
+
+#: ../yast.php:993
+msgid "Use this site as Support site"
+msgstr "Utiliser ce site comme site de support"
+
+#: ../yast.php:1008
+msgid "Apply settings"
+msgstr "Appliquer les changements"
+
+#: ../yast.php:1077
+msgid "An error occured !"
+msgstr "Une erreur est survenue !"
+
+#: ../yast.php:1092
+#, php-format
+msgid ""
+"Support Ticket merge width ticket #%d : %s\n"
+"%s"
+msgstr ""
+"Ticket fusionné avec le ticket #%d : %s\n"
+"%s"
+
+#: ../yast.php:1120
+#, fuzzy, php-format
+msgid ""
+"Congratulations !\n"
+"You've been assigned to the Support Ticket #%1$s  by %2$s\n"
+"\n"
+"Subject: %3$s\n"
+"Type : %4$s\n"
+"Priority : %5$s\n"
+"\n"
+"Message:\n"
+"%6$s\n"
+"\n"
+"---------------------------\n"
+"Technical informations :\n"
+"* Time: %7$s\n"
+"* URL: %8$s\n"
+"* Variables: %9$s\n"
+"* Navigator: %10$s\n"
+"\n"
+"Regards,\n"
+"The website %11$s\n"
+"\n"
+"Issue link : %12$s"
+msgstr ""
+"Fellicitations !\n"
+"Vous avez été assigné au ticket support #%1$s  par %2$s\n"
+"\t\t  \n"
+"Suject: %3$s\n"
+"Type : %4$s\n"
+"Priorité : %5$s\n"
+"\n"
+"Message :\n"
+"%6$s\n"
+"\n"
+"---------------------------\n"
+"Informations techniques :\n"
+"* Heure : %7$s\n"
+"* URL : %8$s\n"
+"* Variables : %9$s\n"
+"* Navigateur : %10$s\n"
+"\n"
+"Cordialement,\n"
+"Le site web %11$s\n"
+"\n"
+"Lien du ticket : %12$s"
+
+#: ../yast.php:1159 ../yast.php:1355 ../yast.php:1655
+#, php-format
+msgid "[Support Ticket] #%d"
+msgstr "[Tickets Support] #%d"
+
+#: ../yast.php:1165
+msgid "Error while assigning"
+msgstr "Erreur pendant l'assignement"
+
+#: ../yast.php:1169
+msgid "Missing parameters"
+msgstr "Paramètres manquants"
+
+#: ../yast.php:1223
+msgid "help"
+msgstr "aide"
+
+#: ../yast.php:1223
+msgid "Help"
+msgstr "Aide"
+
+#: ../yast.php:1224
+msgid "bug"
+msgstr "bug"
+
+#: ../yast.php:1224
+msgid "Bug"
+msgstr "Bug"
+
+#: ../yast.php:1225
+msgid "improvement"
+msgstr "amelioration"
+
+#: ../yast.php:1225
+msgid "Improvement"
+msgstr "Amélioration"
+
+#: ../yast.php:1355
+#, php-format
+msgid ""
+"A new comment has been posted by %4$s.\n"
+"Subject: %1$s\n"
+"Comment:\n"
+"%2$s\n"
+"\n"
+"--\n"
+"Issue link : %3$s\n"
+msgstr ""
+"Un nouveau commentaire a été posté par %4$s.\n"
+"Sujet : %1$s\n"
+"Commentaire :\n"
+"%2$s\n"
+"\n"
+"--\n"
+"Lien du ticket : %3$s\n"
+
+#: ../yast.php:1386
+msgid "Comment is synchronised with the technical server."
+msgstr "Le commentaire n'a pas pu être synchronisé avec le serveur technique"
+
+#: ../yast.php:1390
+msgid "Comment could'nt be synchronised with the technical server."
+msgstr "Le commentaire n'a pas pu être synchronisé avec le serveur technique"
+
+#: ../yast.php:1405
+msgid "Comment is synchronised with the client."
+msgstr "Le commentaire est synchronisé avec le client"
+
+#: ../yast.php:1409
+msgid "Comment could'nt be synchronised with the client."
+msgstr "Le commentaire n'a pas pu être synchronisé avec le client"
+
+#: ../yast.php:1440 ../yast.php:1453 ../yast.php:1474
+msgid "Security error"
+msgstr "Erreur de sécurité"
+
+#: ../yast.php:1443
+#, fuzzy
+msgid "Missing ticket ID"
+msgstr "Tickets fusionnés :"
+
+#: ../yast.php:1483
+msgid "Support Ticket changed"
+msgstr "Ticket support modifié"
+
+#: ../yast.php:1485
+msgid "Support Ticket closed"
+msgstr "Tickets Support cloturé"
+
+#: ../yast.php:1488
+msgid "Support Ticket re-opened"
+msgstr "Ticket support ré-ouvert"
+
+#: ../yast.php:1505
+msgid "Missing content... What did you want to do ?"
+msgstr "Contenu manquant... Que vouliez vous faire ?"
+
+#: ../yast.php:1535
+msgid "Capabilities error !"
+msgstr "Erreur de droits !"
+
+#: ../yast.php:1568
+msgid "Could'nt create ticket !"
+msgstr "Le ticket n'a pu être créé !"
+
+#: ../yast.php:1612
+#, fuzzy, php-format
+msgid ""
+"[Support Ticket] New ticket report from %1$s (%2$s)\n"
+"\n"
+"Subject: %3$s\n"
+"Type : %4$s\n"
+"Priority : %5$s\n"
+"\n"
+"Message:\n"
+"%6$s\n"
+"\n"
+"---------------------------\n"
+"Technical informations :\n"
+"* Time: %7$s\n"
+"* URL: %8$s\n"
+"* Variables: %9$s\n"
+"* Navigator: %10$s\n"
+"\n"
+"Regards,\n"
+"The website %11$s\n"
+"\n"
+"Issue link : %12$s"
+msgstr ""
+"[Ticket support] Nouveau ticket de %1$s (%2$s)\n"
+"\t\t  \n"
+"Sujet : %3$s\n"
+"Type : %4$s\n"
+"Priorité : %5$s\n"
+"\n"
+"Message :\n"
+"%6$s\n"
+"\n"
+"---------------------------\n"
+"Informations techniques :\n"
+"* Heure : %7$s\n"
+"* URL : %8$s\n"
+"* Variables : %9$s\n"
+"* Navigateur : %10$s\n"
+"\n"
+"Cordialement,\n"
+"Le site internet %11$s\n"
+"\n"
+"Lien du ticket : %12$s"
+
+#: ../yast.php:1646 ../yast.php:1774
+msgid "Report succesfully registered !"
+msgstr "Signalement envoyé avec succès !"
+
+#: ../yast.php:1657
+msgid "An e-mail has been sent"
+msgstr "Un courriel a été envoyé"
+
+#: ../yast.php:1682
+msgid "Report is synchronised with the technical server."
+msgstr "Le rapport est synchronisé avec le serveur technique"
+
+#: ../yast.php:1685
+msgid "Report could'nt be synchronised with the technical server."
+msgstr "Le rapport n'a pas pu être synchronisé avec le serveur technique"
+
+#: ../yast.php:1748
+#, php-format
+msgid "Hi %s! Do you want to open a ticket about this page ?"
+msgstr "Salut %s! Voulez vous ouvrir un ticket à propos de cette page ?"
+
+#: ../yast.php:1787
+msgid "From:"
+msgstr "De:"
+
+#: ../yast.php:1791
+msgid "Priority:"
+msgstr "Priorité :"
+
+#: ../yast.php:1801
+msgid "Report type:"
+msgstr "Type de signalement :"
+
+#: ../yast.php:1821
+msgid "Visibility:"
+msgstr "Visibilité :"
+
+#: ../yast.php:1828
+msgid "Why do you  open a ticket ?"
+msgstr "Pourquoi ouvrez vous un ticket ?"
+
+#: ../yast.php:1829
+msgid "Title:"
+msgstr "Titre :"
+
+#: ../yast.php:1832
+msgid "Description:"
+msgstr "Description :"
+
+#: ../yast.php:1869
+msgid "Technical details:"
+msgstr "Détails techniques :"
+
+#: ../yast.php:1870
+msgid "These informations will be sent with your report:"
+msgstr "Ces informations vont être envoyées avec votre signalement :"
+
+#: ../yast.php:1875
+msgid "Page URL:"
+msgstr "URL de la page :"
+
+#: ../yast.php:1881
+msgid "Variables:"
+msgstr "Variables :"
+
+#: ../yast.php:1887
+msgid "Navigator:"
+msgstr "Navigateur :"
+
+#: ../yast.php:1893
+msgid "Submit"
+msgstr "Envoyer"
+
+#: ../yast.php:1925 ../yast.php:1930
+msgid "Support !"
+msgstr "Support !"
+
+#: ../yast.php:1928
+msgid "Contact technical support"
+msgstr "Contacter le support tecnhique"
+
+#~ msgid "Description"
+#~ msgstr "Description"
+
+#~ msgid "Submitted by:"
+#~ msgstr "Soumis par :"
+
+#~ msgid "System:"
+#~ msgstr "Système :"
+
+#~ msgid "Browser:"
+#~ msgstr "Navigateur :"
+
+#~ msgid "Remote tickets"
+#~ msgstr "Ticket du serveur distant"
+
+#~ msgid "Standalone"
+#~ msgstr "Autonome"
+
+#~ msgid "Client"
+#~ msgstr "Client"
+
+#~ msgid "Server"
+#~ msgstr "Serveur"
+
+#~ msgid "Remote server"
+#~ msgstr "Serveur distant"
+
+#~ msgid "Remote token"
+#~ msgstr "Clé distante"
+
+#~ msgid "Local token"
+#~ msgstr "Clé locale"
+
+#~ msgid "Local URL"
+#~ msgstr "URL locale"
+
+#~ msgid "bugs"
+#~ msgstr "tickets"
+
+#~ msgid "Edit bug"
+#~ msgstr "Editer le ticket"
+
+#~ msgid "New bug"
+#~ msgstr "Nouveau ticket"
+
+#~ msgid "Preview bug"
+#~ msgstr "Aperçu du ticket"
+
+#~ msgid "Search a bug"
+#~ msgstr "Rechercher un ticket"
+
+#~ msgid "Parent bug"
+#~ msgstr "Ticket parent"
+
+#~ msgid "Bug types"
+#~ msgstr "Types de tickets"
+
+#~ msgid "Bug ticket"
+#~ msgstr "Ticket de bug"
+
+#~ msgid "Replies"
+#~ msgstr "Réponses"
+
+#~ msgid "[Bug report] #%d"
+#~ msgstr "[Rapport de bug] #%d"
+
+#~ msgid "Bug Ticket closed"
+#~ msgstr "Ticket support cloturé"
+
+#~ msgid "bug type"
+#~ msgstr "Type de tickets"
+
+#~ msgid "[Bug report] You've been assigned to Bug report #%d"
+#~ msgstr "[Ticket support] Vous avez été assigné au ticket support #%d"
+
+#~ msgid "[Bug report] New comment on Bug report #%d"
+#~ msgstr "[Ticket support] Nouveau commentaire sur le ticket support #%d"
+
+#~ msgid "Report a bug here !"
+#~ msgstr "Signaler un bug ici !"
+
+#~ msgid "Hi %s! Did you find a problem ?"
+#~ msgstr "Salut %s ! Vous avez trouvé un problème ?"
+
+#~ msgid "Describe the bug:"
+#~ msgstr "Décrivez le bug :"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuler"
