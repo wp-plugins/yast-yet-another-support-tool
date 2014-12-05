@@ -99,11 +99,11 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 == Changelog ==
 
 = 1.0.2 =
-thanks to @juliobox
 * explicit localization strings
 * improved nonce security
 * Fix XSS vuln
 * Code cleanup
+thanks to @juliobox
 
 = 1.0.1 =
 * Fix localization path
