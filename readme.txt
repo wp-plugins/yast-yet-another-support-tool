@@ -88,6 +88,7 @@ Some normal text, being stylized by the editor
 == Frequently asked questions ==
 
 = Does this plugin intend to replace a full support tool?=
+
 No, this plugin intends to let admins hemp other user on a single or multi-site WP
 
 == Screenshots ==
@@ -103,6 +104,7 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 * improved nonce security
 * Fix XSS vuln
 * Code cleanup
+
 thanks to @juliobox
 
 = 1.0.1 =
