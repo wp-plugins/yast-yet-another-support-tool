@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.0.1
+  Version: 1.0.2
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -177,7 +177,7 @@ class YAST_class {
 	add_submenu_page('yast_list', __('Options', 'yast'), __('Options', 'yast'), 'manage_options', 'yast_options', array(&$this, 'options'));
     }
 
-    function human_spent_time($minutes, $format = 'full') {
+    function human_spent_time($minutes_var, $format = 'full') {
 	if (!is_super_admin()){
 	    return '';
 	}
@@ -189,10 +189,10 @@ class YAST_class {
 	    $str_none = __('No time lost', 'yast');
 	}
 	elseif ($format == 'tiny') {
-	    $str_hour = __('h', 'yast');
-	    $str_hours = __('h', 'yast');
-	    $str_minute = __('min', 'yast');
-	    $str_minutes = __('min', 'yast');
+	    $str_hour = _x('h','time', 'yast');
+	    $str_hours = _x('h','time', 'yast');
+	    $str_minute = _x('min','time', 'yast');
+	    $str_minutes = _x('min','time', 'yast');
 	    $str_none = __('None', 'yast');
 	}
 	else {
@@ -202,7 +202,7 @@ class YAST_class {
 	    $str_minutes = 'm';
 	    $str_none = '-';
 	}
-	$minutes = abs($minutes);
+	$minutes = abs($minutes_var);
 	if ($minutes == 0) {
 	    return $str_none;
 	}
@@ -258,25 +258,25 @@ class YAST_class {
 	}
 
 	$ticket = $this->get_ticket(isset($_GET['ticket']) && is_numeric($_GET['ticket']) ? $_GET['ticket'] : NULL);
-	$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&referer=' .sanitize_text_field(urlencode($_GET['referer']));
+	$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&referer=' .esc_url(urlencode($_GET['referer']));
 	?>
 	<div class="wrap">
 	    <div class="icon32" id="icon-yast"><br></div>
-	    <h2><?php _e('Support ticket', 'yast'); ?> <?= $ticket->ID ?>
+	    <h2><?php _e('Support ticket', 'yast'); ?> <?php echo  $ticket->ID ?>
 		<?php if (is_super_admin()): ?>
-		<a href="post.php?post=<?=$ticket->ID?>&action=edit&referer=" class="button"><?php _e('Edit ticket', 'yast'); ?></a>
+		<a href="post.php?post=<?php echo $ticket->ID?>&action=edit&referer=" class="button"><?php _e('Edit ticket', 'yast'); ?></a>
 		<?php endif; ?>
 	    </h2>
 	    <div  id="poststuff">
 	<?php if (isset($_GET['referer'])): ?>
-	    	<a href="<?= sanitize_text_field($_GET['referer']) ?>">&laquo; <?php _e('Back to support tickets list', 'yast'); ?></a>
+	    	<a href="<?php echo  esc_url($_GET['referer']) ?>">&laquo; <?php _e('Back to support tickets list', 'yast'); ?></a>
 	<?php endif; ?>
-		<h1><?= $ticket->post_title ?></h1>
+		<h1><?php echo  $ticket->post_title ?></h1>
 		<div class="postbox" id="ticket_content">
 		    <h3><?php _e('Informations', 'yast'); ?></h3>
 		    <div class="inside">
 			<time>
-			    <span><?= date_i18n(get_option('date_format').', '.get_option('time_format'), strtotime($ticket->post_date)); ?></span>
+			    <span><?php echo  date_i18n(get_option('date_format').', '.get_option('time_format'), strtotime($ticket->post_date)); ?></span>
 			</time>
 			<form action="#" method="post">
 	<?php $this->custom_boxinfo($ticket) ?>
@@ -292,7 +292,7 @@ class YAST_class {
 			<p>
 			    <span class="dashicons dashicons-backup"></span>
 			    <?php _e('Spent time', 'yast') ?>
-			    <strong><?= $this->human_spent_time($this->total_spent_time($ticket->ID)) ?></strong>
+			    <strong><?php echo  $this->human_spent_time($this->total_spent_time($ticket->ID)) ?></strong>
 			</p>
 
 			<form action="#" method="post">
@@ -319,8 +319,8 @@ class YAST_class {
 	    		<form action="admin-post.php" method="post" id="sent" class="yast_close">
 	    <?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 	    		    <input type="hidden" name="action" value="yastupdate">
-	    		    <input type="hidden" name="referer" value="<?= sanitize_text_field($_GET['referer']) ?>">
-	    		    <input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+	    		    <input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer']) ?>">
+	    		    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 	    		    <input type="hidden" name="post_status" value="open">
 	    		    <input type="submit" value="<?php _e('Re-open this ticket ?', 'yast') ?>" class="button-primary">
 	    		</form>
@@ -330,8 +330,8 @@ class YAST_class {
 				<form action="admin-post.php" method="post" id="sent" class="yast_close">
 		<?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 				    <input type="hidden" name="action" value="yastupdate">
-				    <input type="hidden" name="referer" value="<?= sanitize_text_field($_GET['referer']) ?>">
-				    <input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+				    <input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer']) ?>">
+				    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 				    <input type="hidden" name="post_status" value="closed">
 				    <input type="submit" value="<?php _e('Close this ticket ?', 'yast') ?>" class="button-primary">
 				</form>
@@ -340,8 +340,8 @@ class YAST_class {
 	    		<form action="admin-post.php" method="post" id="yast_comment">
 				<?php wp_nonce_field('ticket_comment', 'ticket_comment'); ?>
 	    		    <input type="hidden" name="action" value="yastupdate">
-	    		    <input type="hidden" name="referer" value="<?= sanitize_text_field($_GET['referer'] . '#sent') ?>">
-	    		    <input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+	    		    <input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer'] . '#sent') ?>">
+	    		    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 					<?php if (is_super_admin()): ?>
 				    <p>
 					<label>
@@ -372,16 +372,16 @@ class YAST_class {
 		    <form action="admin-post.php" method="post" id="delete" class="yast_delete">
 	<?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 			<input type="hidden" name="action" value="yastupdate">
-			<input type="hidden" name="referer" value="<?= sanitize_text_field($_GET['referer']) ?>">
-			<input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+			<input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer']) ?>">
+			<input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 			<input type="hidden" name="post_status" value="trash">
 			<input type="submit" value="<?php _e('Delete this ticket ?', 'yast') ?>" class="button">
 		    </form>
 		    <form action="admin-post.php" method="post" id="close" class="yast_close">
 	<?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 			<input type="hidden" name="action" value="yastupdate">
-			<input type="hidden" name="referer" value="<?= sanitize_text_field($_GET['referer']) ?>">
-			<input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+			<input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer']) ?>">
+			<input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 			<input type="hidden" name="post_status" value="closed">
 			<input type="submit" value="<?php _e('Close this ticket ?', 'yast') ?>" class="button">
 		    </form>
@@ -517,7 +517,7 @@ class YAST_class {
 			<th><span class="dashicons dashicons-admin-users"></span>&nbsp;<?php _e('User', 'yast') ?></th>
 			<th><span class="dashicons dashicons-calendar"></span>&nbsp;<?php _e('Date', 'yast') ?></th>
 			<th><span class="dashicons dashicons-admin-comments" title="<?php _e('Answers', 'yast') ?>"></span></th>
-			<th><?= (is_super_admin() ? '<span class="dashicons dashicons-backup" title="'.__('Spent time', 'yast').'"></span>' : '') ?></th>
+			<th><?php echo  (is_super_admin() ? '<span class="dashicons dashicons-backup" title="'.__('Spent time', 'yast').'"></span>' : '') ?></th>
 			<th colspan="2"><?php _e('Status', 'yast') ?></th>
 			<th><?php _e('Actions', 'yast') ?></th>
 		    </tr>
@@ -538,21 +538,21 @@ class YAST_class {
 			$referer = ('admin.php?page=yast_list&post_status=' . $status . '&paged=' . $paged);
 			$count = count(get_comments(array('post_id' => $ticket->ID)));
 			?>
-	    	    <tr class="yast_<?= $ticket->post_status; ?> yast_<?= $ticket->visibility ?> yast_<?= ($count > 0 ? 'active' : 'waiting') ?>">
-	    		<td><a href="<?= $link ?>"><?php the_title() ?></a></td>
+	    	    <tr class="yast_<?php echo  $ticket->post_status; ?> yast_<?php echo  $ticket->visibility ?> yast_<?php echo  ($count > 0 ? 'active' : 'waiting') ?>">
+	    		<td><a href="<?php echo  $link ?>"><?php the_title() ?></a></td>
 	    		<td><?php
 		    foreach ($types as $type) {
 			echo $type->name . ' ';
 		    }
 		    ?></td>
-	    		<td><a href="<?= $ticket->page['url'] ?>" target="_blank"><?= substr($ticket->page['url'], 0, 20) . '...' ?></a></td>
-	    		<td><span style="color:<?= $levels[$ticket->priority]['color'] ?>;"><?= $levels[$ticket->priority]['name'] ?></span></td>
-	    		<td><?= $this->display_user($ticket->assignedto) ?></td>
-	    		<td><?= $this->display_user($ticket->reporter) ?></td>
+	    		<td><a href="<?php echo  $ticket->page['url'] ?>" target="_blank"><?php echo  substr($ticket->page['url'], 0, 20) . '...' ?></a></td>
+	    		<td><span style="color:<?php echo  $levels[$ticket->priority]['color'] ?>;"><?php echo  $levels[$ticket->priority]['name'] ?></span></td>
+	    		<td><?php echo  $this->display_user($ticket->assignedto) ?></td>
+	    		<td><?php echo  $this->display_user($ticket->reporter) ?></td>
 	    		<td><?php the_date(); ?></td>
 	    		<td align="center"><?php echo $count ?></td>
-	    		<td><?= str_replace(' ','&nbsp;',$this->human_spent_time($this->total_spent_time($ticket->ID), 'small')) ?></td>
-	    		<td><?= __(ucfirst($ticket->post_status), 'yast'); ?></td>
+	    		<td><?php echo  str_replace(' ','&nbsp;',$this->human_spent_time($this->total_spent_time($ticket->ID), 'small')) ?></td>
+	    		<td><?php echo  __(ucfirst($ticket->post_status), 'yast'); ?></td>
 			<td><?php if ($ticket->visibility == 'private'): ?>
 				    <span class="yast_icon yast_icon-private" title="<?php _e('Private', 'yast'); ?>">P</span>
 	    <?php endif; ?></td>
@@ -562,8 +562,8 @@ class YAST_class {
 					<form action="admin-post.php" method="post" class="yast_formbutton yast_close">
 					<?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 					    <input type="hidden" name="action" value="yastupdate">
-					    <input type="hidden" name="referer" value="<?= $referer ?>">
-					    <input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+					    <input type="hidden" name="referer" value="<?php echo  $referer ?>">
+					    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 					    <input type="hidden" name="post_status" value="closed">
 					    <input type="submit" value="C" title="<?php _e('Close', 'yast'); ?>">
 					</form>
@@ -571,8 +571,8 @@ class YAST_class {
 					<form action="admin-post.php" method="post" class="yast_formbutton yast_open">
 					<?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 					    <input type="hidden" name="action" value="yastupdate">
-					    <input type="hidden" name="referer" value="<?= $referer ?>">
-					    <input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+					    <input type="hidden" name="referer" value="<?php echo  $referer ?>">
+					    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 					    <input type="hidden" name="post_status" value="open">
 					    <input type="submit" value="O" title="<?php _e('Re-Open', 'yast'); ?>">
 					</form>
@@ -580,8 +580,8 @@ class YAST_class {
 	    			<form action="admin-post.php" method="post" class="yast_formbutton yast_delete">
 	    <?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 	    			    <input type="hidden" name="action" value="yastupdate">
-	    			    <input type="hidden" name="referer" value="<?= $referer ?>">
-	    			    <input type="hidden" name="ticket" value="<?= $ticket->ID ?>">
+	    			    <input type="hidden" name="referer" value="<?php echo  $referer ?>">
+	    			    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 	    			    <input type="hidden" name="post_status" value="trash">
 	    			    <input type="submit" value="X" title="<?php _e('Delete', 'yast'); ?>">
 	    			</form>
@@ -678,14 +678,16 @@ class YAST_class {
 	    <div class="misc-pub-section" id="ticket-status">
 	        <label>
 	    <?php _e('Status:', 'yast') ?>
+
+		    <?php wp_nonce_field( 'ticket_save', 'ticket_save') ?>
 	    	<select id="post_status" name="ticket_status">
 		    <option></option>
-	    	    <option value="open" <?= $post->post_status == 'open' || $post->post_status == 'publish' ? 'selected' : '' ?>><?php _e('Open', 'yast') ?></option>
-	    	    <option value="closed" <?= $post->post_status == 'closed' ? 'selected' : '' ?>><?php _e('Closed', 'yast') ?></option>
+	    	    <option value="open" <?php echo  $post->post_status == 'open' || $post->post_status == 'publish' ? 'selected' : '' ?>><?php _e('Open', 'yast') ?></option>
+	    	    <option value="closed" <?php echo  $post->post_status == 'closed' ? 'selected' : '' ?>><?php _e('Closed', 'yast') ?></option>
 	    	</select>
 	        </label>
 		<p>
-		<a href="admin.php?page=yast_list&ticket=<?=$post->ID?>&referer=admin.php%3Fpage%3Dyast_list"><?php _e('Go back to ticket', 'yast') ?></a>
+		<a href="admin.php?page=yast_list&ticket=<?php echo $post->ID?>&referer=admin.php%3Fpage%3Dyast_list"><?php _e('Go back to ticket', 'yast') ?></a>
 		</p>
 	    </div>
 	    <?php
@@ -726,7 +728,7 @@ class YAST_class {
 	}
 	wp_enqueue_script('user-suggest', admin_url('/js/user-suggest.min.js'), array('jquery'), false, true);
 	?>
-	<input name="yast_reporter" type="text" id="yast_reporter" class="wp-suggest-user widefat" value="<?= $ticket->reporter ?>" />
+	<input name="yast_reporter" type="text" id="yast_reporter" class="wp-suggest-user widefat" value="<?php echo  $ticket->reporter ?>" />
 
 	<?php
     }
@@ -743,7 +745,7 @@ class YAST_class {
 	}
 	?>
 	<div class="ticket_description">
-		<?= apply_filters('the_content', $ticket->post_content) ?>
+		<?php echo  apply_filters('the_content', $ticket->post_content) ?>
 	</div>
 	<div class="yast_ticket_navigator">
 	    <ul>
@@ -820,13 +822,13 @@ class YAST_class {
 		?>
 		<div class="ticket_description">
 		    <h4>
-			<a href="<?= $child->lien ?>">
-		<?= $child->post_title ?>
+			<a href="<?php echo  $child->lien ?>">
+		<?php echo  $child->post_title ?>
 			</a>
-		<?= $this->display_user($child->reporter) ?>
+		<?php echo  $this->display_user($child->reporter) ?>
 		    </h4>
-		<?= apply_filters('the_content', $child->post_content) ?>
-		    <p><a href="<?= $child->page['url'] ?>" target="_blank"><?= $child->page['url'] ?></a></p>
+		<?php echo  apply_filters('the_content', $child->post_content) ?>
+		    <p><a href="<?php echo  $child->page['url'] ?>" target="_blank"><?php echo  $child->page['url'] ?></a></p>
 		</div>
 		<?php
 	    }
@@ -848,20 +850,21 @@ class YAST_class {
 
 		<li>
 		    <?php _e('Assigned to:', 'yast') ?>
-		    <span id="yast_assigneto"><?= $this->display_user($ticket->assignedto) ?></span>
+		    <span id="yast_assigneto"><?php echo  $this->display_user($ticket->assignedto) ?></span>
 		    <?php
 		    if ($conf['remote_use'] != 'client' &&
 			    (!is_multisite() && user_can(get_current_user_id(), 'manage_options') ||
 			    is_multisite() && user_can(get_current_user_id(), 'manage_network_options'))
 		    ) {
 			?>
-	    	    <input name="assigned" data-id="<?= $ticket->ID ?>" type="text" id="yast_assigned" class="wp-suggest-user" value="<?= $ticket->assigned->user_login ?>" />
+	    	    <input name="assigned" data-id="<?php echo  $ticket->ID ?>" type="text" id="yast_assigned" class="wp-suggest-user" value="<?php echo  $ticket->assigned->user_login ?>" />
 	    	    <a id="yast_reassigne" class="button"><?php _e('Assign', 'yast') ?></a>
 	    	    <a id="yast_assigne"><?php _e('Change', 'yast') ?></a>
 	<?php } ?>
 		</li>
 
-		<li id="yast_merge" data-id="<?= $ticket->ID ?>">
+		    <?php wp_nonce_field( 'ticket_merge', 'ticket_merge' ) ?>
+		<li id="yast_merge" data-id="<?php echo  $ticket->ID ?>">
 	<?php if ($ticket->post_parent == 0) { ?>
 	    	    <button><?php _e('Merge with another ticket', 'yast') ?></button>
 	<?php
@@ -869,7 +872,7 @@ class YAST_class {
 	else {
 	    $parent = $this->get_ticket($ticket->post_parent);
 	    ?>
-	    	    <a href="<?= $parent->lien ?>">
+	    	    <a href="<?php echo  $parent->lien ?>">
 	    <?php printf(__('Merged with ticket #%d : %s', 'yast'), $ticket->post_parent, $parent->post_title); ?>
 	    	    </a>
 	<?php } ?>
@@ -894,14 +897,14 @@ class YAST_class {
 	<?php if ($ticket->navigator != ''): ?>
 	    <div class="ticket_navigator">
 	        <h5><?php _e('Environment', 'yast') ?></h5>
-	        <p><?php _e('User Agent:', 'yast') ?> <?= $ticket->navigator['userAgent'] ?></p>
+	        <p><?php _e('User Agent:', 'yast') ?> <?php echo  $ticket->navigator['userAgent'] ?></p>
 	    </div>
 	<?php endif ?>
 
 	<?php if ($ticket->page != NULL): ?>
 	    <div class="ticket_case_url">
 	        <h5><?php _e('Case URL', 'yast') ?></h5>
-	        <p><a href="<?= $ticket->page['url'] ?>" target="ticket_preview" id="ticket_preview_link"><?= $ticket->page['url'] ?></a></p>
+	        <p><a href="<?php echo  $ticket->page['url'] ?>" target="ticket_preview" id="ticket_preview_link"><?php echo  $ticket->page['url'] ?></a></p>
 	    <?php if (sizeof($ticket->page['post']) > 1): ?>
 		    <b>POST:</b>
 		    <pre><?php print_r($ticket->page['post']) ?></pre>
@@ -949,6 +952,9 @@ class YAST_class {
 	if (!current_user_can('manage_options')){
 	    return;
 	}
+	if (!isset($_POST['ticket_set_options']) || !wp_verify_nonce($_POST['ticket_set_options'], 'ticket_set_options')) {
+	    wp_die(__('Security error', 'yast'));
+	}
 	if (isset($_POST['yast_options'])) {
 	    $yast_options = $_POST['yast_options'];
 	    $yast_options['alert_emails'] = explode(',', $yast_options['alert_emails']);
@@ -971,9 +977,10 @@ class YAST_class {
 	?>
 	<div class="wrap">
 	    <div class="icon32" id="icon-yast"><br></div>
-	    <h2><?php _e('Support Tickets Options', 'eventpost'); ?></h2>
+	    <h2><?php _e('Support Tickets Options', 'yast'); ?></h2>
 	    <form name="form1" id="yast_options_form" method="post" action="admin-post.php">
 		<input type="hidden" name="action" value="yastsaveoptions">
+		<?php wp_nonce_field('ticket_set_options', 'ticket_set_options'); ?>
 		<h3><?php _e('Alerts', 'yast'); ?></h3>
 		<p>
 		    <label>
@@ -988,11 +995,11 @@ class YAST_class {
 			<select name="yast_options[default_type]">
 			    <option value=''></option>
 		<?php foreach ($this->types as $type) { ?>
-	    		    <option value='<?= $type->slug ?>' <?php
+	    		    <option value='<?php echo  $type->slug ?>' <?php
 	    if ($yast_options['default_type'] == $type->slug){
 		echo'selected';
 	    }
-	    ?>><?= $type->name ?></option>
+	    ?>><?php echo  $type->name ?></option>
 			<?php } ?>
 			</select>
 		    </label>
@@ -1001,8 +1008,8 @@ class YAST_class {
 		    <label>
 				<?php _e('Force SSL', 'yast') ?>
 			<select name="yast_options[force_ssl]">
-			    <option value='0' <?= ($yast_options['force_ssl'] == 0 ? 'selected' : '') ?>><?php _e('No', 'yast') ?></option>
-			    <option value='1' <?= ($yast_options['force_ssl'] == 1 ? 'selected' : '') ?>><?php _e('Yes', 'yast') ?></option>
+			    <option value='0' <?php echo  ($yast_options['force_ssl'] == 0 ? 'selected' : '') ?>><?php _e('No', 'yast') ?></option>
+			    <option value='1' <?php echo  ($yast_options['force_ssl'] == 1 ? 'selected' : '') ?>><?php _e('Yes', 'yast') ?></option>
 			</select>
 		    </label>
 		</p>
@@ -1016,8 +1023,8 @@ class YAST_class {
 	    $blogs_list = wp_get_sites(array('limit' => 0, 'deleted' => false, 'archived' => false, 'spam' => false));
 	    foreach ($blogs_list as $blog):
 		?>
-				    <option value="<?= $blog['blog_id'] ?>" <?php echo ($yast_options['support_site'] === $blog['blog_id'] ? 'selected' : ''); ?>>
-		<?= $blog['domain'] ?>
+				    <option value="<?php echo  $blog['blog_id'] ?>" <?php echo ($yast_options['support_site'] === $blog['blog_id'] ? 'selected' : ''); ?>>
+		<?php echo  $blog['domain'] ?>
 				    </option>
 	    <?php endforeach; ?>
 	    		</select>
@@ -1089,6 +1096,9 @@ class YAST_class {
 	if (!current_user_can('manage_options')){
 	    return;
 	}
+	if (!isset($_POST['ticket_merge']) || !wp_verify_nonce($_POST['ticket_merge'], 'ticket_merge')) {
+	    wp_die(__('Security error', 'yast'));
+	}
 	if (is_multisite()){
 	    switch_to_blog($this->options['support_site']);
 	}
@@ -1133,17 +1143,17 @@ class YAST_class {
 	    if (is_multisite()){
 		switch_to_blog($this->options['support_site']);
 	    }
-	    if ((false !== $ticket = $this->get_ticket($_REQUEST['ticket_id'])) && (false !== $assign = get_user_by('login', sanitize_text_field($_REQUEST['assign'])))) {
+	    if ((false !== $ticket = $this->get_ticket($_REQUEST['ticket_id'])) && (false !== $assign = get_user_by('login', esc_attr($_REQUEST['assign'])))) {
 
 		global $current_user;
 		get_currentuserinfo();
 
 		$level = $this->levels($ticket->priority);
-		$server_name = basename(get_site_option('siteurl'));
+		$server_name = basename(get_site_url());
 		if (empty($server_name)){
-		    $server_name = basename(get_option('siteurl'));
+		    $server_name = basename(get_site_url());
 		}
-		$assigned = sanitize_text_field($_REQUEST['assign']) . '@' . $server_name;
+		$assigned = esc_attr($_REQUEST['assign']) . '@' . $server_name;
 
 		$msg_mail = sprintf(__('Congratulations !
 You\'ve been assigned to the Support Ticket #%1$s  by %2$s
@@ -1250,13 +1260,14 @@ Issue link : %12$s', 'yast'),
 
     function default_types() {
 	return $this->types;
-	/*return array(
-	    __('help', 'yast') => __('Help', 'yast'),
-	    __('bug', 'yast') => __('Bug', 'yast'),
-	    __('improvement', 'yast') => __('Improvement', 'yast')
-	);*/
     }
-
+    /*
+     * comment_dests
+     * retreive a list of users concerned by a particular ticket
+     *
+     * @return: array of users
+     *
+     */
     function comment_dests($ticket) {
 	$dests = array();
 	//Notify assigned user
@@ -1291,7 +1302,13 @@ Issue link : %12$s', 'yast'),
     function send_to_server($action, $ticket_id, $url, $more = array()) {
 	return;
     }
-
+    /*
+     * reply
+     * registers a comment and send notifications
+     *
+     * @return: void
+     *
+     */
     function reply($atts) {
 	extract(shortcode_atts(
 			array(
@@ -1401,7 +1418,12 @@ Issue link : %3$s
 	    }
 	}
     }
-
+    /*
+     * savepost
+     * called by savepost hook
+     * overwrite post status of the ticket being saved
+     *
+     */
     function savepost($ticket_id){
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE){
             return;
@@ -1409,10 +1431,13 @@ Issue link : %3$s
 	if (!isset($_POST['post_type']) || $_POST['post_type']!='yast'){
 	    return;
 	}
+	if (!isset($_POST['ticket_save']) || !wp_verify_nonce($_POST['ticket_save'], 'ticket_save')) {
+	    wp_die(__('Security error', 'yast'));
+	}
 	if(isset($_POST['ticket_status']) && in_array($_POST['ticket_status'], array('open','closed','trash'))){
 
 
-	    update_post_meta($ticket_id,'reporter',sanitize_text_field($_POST['yast_reporter']));
+	    update_post_meta($ticket_id,'reporter',esc_attr($_POST['yast_reporter']));
 	    header('TestYast2: ok');
 	    remove_action('save_post', array(&$this, 'savepost'));
 	    wp_update_post(array(
@@ -1423,6 +1448,10 @@ Issue link : %3$s
 
     }
 
+    /*
+     * Update a ticket within posting a comment
+     *
+     */
     function update() {
 	if (!is_user_logged_in()) {
 	    wp_die(__('Security error', 'yast'));
@@ -1435,7 +1464,7 @@ Issue link : %3$s
 	}
 
 	$ticket = $this->get_ticket($_POST['ticket']);
-	$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&referer=' . urlencode(sanitize_text_field($_POST['referer']));
+	$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&referer=' . urlencode(esc_url($_POST['referer']));
 
 	if (isset($_POST['message']) && trim(strip_tags($_POST['message'])) != '') {
 	    if (!isset($_POST['ticket_comment']) || !wp_verify_nonce($_POST['ticket_comment'], 'ticket_comment')) {
@@ -1450,7 +1479,7 @@ Issue link : %3$s
 			    'user_name' => $current_user->user_login,
 			    'user_email' => $current_user->user_email,
 			    'user_id' => $current_user->ID,
-			    'message' => sanitize_text_field(stripslashes($_POST['message'])),
+			    'message' => esc_attr(stripslashes($_POST['message'])),
 			    'confirm' => false,
 			    'spent_time' => isset($_POST['spent_time']) ? abs($_POST['spent_time']) : 0,
 		));
@@ -1487,7 +1516,7 @@ Issue link : %3$s
 			    'spent_time' => isset($_POST['spent_time']) ? abs($_POST['spent_time']) : 0,
 			)
 		);
-		wp_redirect(sanitize_text_field($_REQUEST['referer']) . '&alert=' . $_POST['post_status']);
+		wp_redirect(esc_url($_REQUEST['referer']) . '&alert=' . $_POST['post_status']);
 		exit;
 	    }
 	}
@@ -1500,6 +1529,10 @@ Issue link : %3$s
 	exit;
     }
 
+    /*
+     * mailer
+     * Fill headers values for mail sending
+     */
     function mailer() {
 	global $phpmailer;
 	if (!empty($this->mailid)) {
@@ -1516,6 +1549,11 @@ Issue link : %3$s
 	}
     }
 
+    /*
+     * create
+     * Creates a ticket from $_POST datas
+     *
+     */
     function create() {
 	if (!isset($_POST['from']) || (!is_user_logged_in() && $_POST['from'] != 'shortcode')) {
 	    if ($_POST['from'] == 'ajax') {
@@ -1537,15 +1575,15 @@ Issue link : %3$s
 	$description = '';
 	if (is_array($_REQUEST['description'])) {
 	    foreach ($_REQUEST['description'] as $key => $value) {
-		$description.=$key . ' : ' . "\n" . sanitize_text_field($value) . "\n\n";
+		$description.=esc_attr($key) . ' : ' . "\n" . esc_attr($value) . "\n\n";
 	    }
 	}
 	else {
-	    $description = sanitize_text_field($_REQUEST['description']);
+	    $description = wp_kses_post($_REQUEST['description']);
 	}
 
 	$datas['post_title'] = sanitize_text_field($_REQUEST['title']);
-	$datas['post_content'] = sanitize_text_field($description);
+	$datas['post_content'] = $description;
 	$datas['post_type'] = 'yast';
 	$datas['post_status'] = 'open';
 	$datas['comment_status'] = 'open';
@@ -1561,31 +1599,31 @@ Issue link : %3$s
 	    else {
 		wp_redirect(get_option('siteurl') . '?message=in');
 		exit;
-		wp_redirect(sanitize_text_field($_POST['page_url']) . (strstr($_POST['page_url'], '?') ? '&' : '?') . 'message=ko');
+		wp_redirect(esc_url($_POST['page_url']) . (strstr($_POST['page_url'], '?') ? '&' : '?') . 'message=ko');
 	    }
 	    exit;
 	}
 	else {
 
 	    $meta_page = array(
-		'url' => sanitize_text_field($_REQUEST['page_url']),
+		'url' => esc_url($_REQUEST['page_url']),
 		'post' => $this->recursive_sanitize(unserialize($_REQUEST['page_post']))
 	    );
 	    $meta_navigator = array(
-		'appName' => isset($_REQUEST['navigator_appName']) ? sanitize_text_field($_REQUEST['navigator_appName']) : '',
-		'userAgent' => isset($_REQUEST['navigator_userAgent']) ? sanitize_text_field($_REQUEST['navigator_userAgent']) : '',
-		'platform' => isset($_REQUEST['navigator_platform']) ? sanitize_text_field($_REQUEST['navigator_platform']) : '',
-		'language' => isset($_REQUEST['navigator_language']) ? sanitize_text_field($_REQUEST['navigator_language']) : '',
-		'product' => isset($_REQUEST['navigator_product']) ? sanitize_text_field($_REQUEST['navigator_product']) : '',
+		'appName' => isset($_REQUEST['navigator_appName']) ? esc_attr($_REQUEST['navigator_appName']) : '',
+		'userAgent' => isset($_REQUEST['navigator_userAgent']) ? esc_attr($_REQUEST['navigator_userAgent']) : '',
+		'platform' => isset($_REQUEST['navigator_platform']) ? esc_attr($_REQUEST['navigator_platform']) : '',
+		'language' => isset($_REQUEST['navigator_language']) ? esc_attr($_REQUEST['navigator_language']) : '',
+		'product' => isset($_REQUEST['navigator_product']) ? esc_attr($_REQUEST['navigator_product']) : '',
 	    );
-	    add_post_meta($ticket_id, 'priority', sanitize_text_field($_REQUEST['priority']));
+	    add_post_meta($ticket_id, 'priority', esc_attr($_REQUEST['priority']));
 	    add_post_meta($ticket_id, 'page', $meta_page);
 	    add_post_meta($ticket_id, 'navigator', $meta_navigator);
-	    add_post_meta($ticket_id, 'reporter', sanitize_text_field($_REQUEST['reporter']));
-	    add_post_meta($ticket_id, 'visibility', sanitize_text_field($_REQUEST['visibility']));
+	    add_post_meta($ticket_id, 'reporter', esc_attr($_REQUEST['reporter']));
+	    add_post_meta($ticket_id, 'visibility', esc_attr($_REQUEST['visibility']));
 
 
-	    wp_set_object_terms($ticket_id, array(sanitize_text_field($_REQUEST['type'])), 'ticket_type');
+	    wp_set_object_terms($ticket_id, array(esc_attr($_REQUEST['type'])), 'ticket_type');
 
 	    global $current_user;
 	    get_currentuserinfo();
@@ -1626,8 +1664,8 @@ Issue link : %12$s', 'yast'),
 		    $level['name'],
 		    $datas['post_content'],
 		    date_i18n(get_option('date_format').', '.get_option('time_format')),
-		    sanitize_text_field($_REQUEST['page_url']),
-		    sanitize_text_field($_REQUEST['page_post']),
+		    esc_url($_REQUEST['page_url']),
+		    wp_kses_post($_REQUEST['page_post']),
 		    $this->human_nav_info($_REQUEST['navigator_userAgent']),
 		    get_bloginfo('name'),
 		    $ticket->lien
@@ -1682,7 +1720,7 @@ Issue link : %12$s', 'yast'),
 		    ));
 		}
 		else {
-		    wp_redirect(sanitize_text_field($_POST['page_url']) . (strstr($_POST['page_url'], '?') ? '&' : '?') . 'form_message=ok');
+		    wp_redirect(esc_url($_POST['page_url']) . (strstr($_POST['page_url'], '?') ? '&' : '?') . 'form_message=ok');
 		}
 	    }
 
@@ -1694,6 +1732,11 @@ Issue link : %12$s', 'yast'),
 	return 'Bad parameters';
     }
 
+    /*
+     * extract_fields
+     * used by the form shortcode to split description into many fields
+     *
+     */
     function extract_fields($str) {
 	while (strstr($str, '  ')) {
 	    $str = str_replace('  ', ' ', $str);
@@ -1727,6 +1770,10 @@ Issue link : %12$s', 'yast'),
 	<?php
     }
 
+    /*
+     * form
+     * Display a submit form for users to add a ticket
+     */
     function form($atts = NULL, $content = NULL) {
 	$conf = $this->options;
 
@@ -1752,7 +1799,6 @@ Issue link : %12$s', 'yast'),
 
 	global $current_user;
 	get_currentuserinfo();
-	$currentUrl = $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"];
 	$currentUrl = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 	$admin_url = admin_url();
 	if ($atts['force_ssl'] == true) {
@@ -1776,7 +1822,7 @@ Issue link : %12$s', 'yast'),
 	else {
 	    wp_enqueue_script('user-suggest', admin_url('/js/user-suggest.min.js'), array('jquery'), false, true);
 	    $ret.='<label>' . __('From:', 'yast') . ' <input type="text" name="reporter" id="ticketrep_reporter" class="wp-suggest-user" value="' . $this->current_reporter() . '" /></label>';
-	    //<input name="assigned" data-id="<?= $ticket->ID " type="text" id="yast_assigned" value="<?= $ticket->assigned->user_login " />
+	    //<input name="assigned" data-id="<?php echo  $ticket->ID " type="text" id="yast_assigned" value="<?php echo  $ticket->assigned->user_login " />
 	}
 	$ret.='<p><label>
 	  	' . __('Priority:', 'yast') . '
@@ -1870,13 +1916,13 @@ Issue link : %12$s', 'yast'),
 	  <p>
 	  	<label>
 	  		' . __('Variables:', 'yast') . '
-	  		<textarea name="page_post" id="ticketrep_page_post" cols="60" rows="5"  ' . ($foradmin ? '' : 'readonly') . '>' . stripslashes(serialize($_POST)) . '</textarea>
+	  		<textarea name="page_post" id="ticketrep_page_post" cols="60" rows="5"  ' . ($foradmin ? '' : 'readonly') . '>' . esc_attr(stripslashes(serialize($_POST))) . '</textarea>
 	  	</label>
 	  </p>
 	  <p>
 	  	<label>
 	  		' . __('Navigator:', 'yast') . '
-	  		<input type="text" name="navigator_userAgent" id="ticketrep_navigator" size="60" value="' . $_SERVER['HTTP_USER_AGENT'] . '"  ' . ($foradmin ? '' : 'readonly') . '>
+	  		<input type="text" name="navigator_userAgent" id="ticketrep_navigator" size="60" value="' . esc_attr($_SERVER['HTTP_USER_AGENT']) . '"  ' . ($foradmin ? '' : 'readonly') . '>
 	  	</label>
 	  </p>
 	 </div>

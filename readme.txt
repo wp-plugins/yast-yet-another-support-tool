@@ -98,6 +98,13 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.0.2 =
+thanks to @juliobox
+* explicit localization strings
+* improved nonce security
+* Fix XSS vuln
+* Code cleanup
+
 = 1.0.1 =
 * Fix localization path
 
@@ -106,7 +113,8 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Upgrade notice ==
 
-No particular informations
+= 1.0.2 =
+Security update thanks to @juliobox
 
 == Languages ==
 
