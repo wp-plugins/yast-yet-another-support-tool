@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.0.2
+  Version: 1.0.3
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -321,7 +321,7 @@ class YAST_class {
 	    		    <input type="hidden" name="action" value="yastupdate">
 	    		    <input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer']) ?>">
 	    		    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
-	    		    <input type="hidden" name="post_status" value="open">
+	    co		    <input type="hidden" name="post_status" value="open">
 	    		    <input type="submit" value="<?php _e('Re-open this ticket ?', 'yast') ?>" class="button-primary">
 	    		</form>
 			    <?php else: ?>
@@ -539,7 +539,18 @@ class YAST_class {
 			$count = count(get_comments(array('post_id' => $ticket->ID)));
 			?>
 	    	    <tr class="yast_<?php echo  $ticket->post_status; ?> yast_<?php echo  $ticket->visibility ?> yast_<?php echo  ($count > 0 ? 'active' : 'waiting') ?>">
-	    		<td><a href="<?php echo  $link ?>"><?php the_title() ?></a></td>
+			<td>
+			    <a href="<?php echo  $link ?>"><span class="dashicons dashicons-edit"></span>
+				    <?php
+				    if('' === get_the_title()){
+					echo strip_tags(get_the_excerpt());
+				    }
+				    else{
+					the_title();
+				    }
+				    ?>
+			    </a>
+			</td>
 	    		<td><?php
 		    foreach ($types as $type) {
 			echo $type->name . ' ';

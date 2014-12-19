@@ -2,7 +2,7 @@
 Contributors: bastho, n4thaniel
 Tags: ticket, support, wphelp, assistance, tickets, multisite
 Requires at least: 3.1
-Tested up to: 4.0.1
+Tested up to: 4.1.0
 Donate link: http://ba.stienho.fr/#don
 Stable tag: /trunk
 License: GPLv2
@@ -98,6 +98,9 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 3. New ticket form
 
 == Changelog ==
+
+= 1.0.3 =
+* Found a way to display tickets with empty title
 
 = 1.0.2 =
 * explicit localization strings
