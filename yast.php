@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.0.3
+  Version: 1.0.4
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -403,6 +403,9 @@ class YAST_class {
 	if($post_status = \filter_input(INPUT_GET,'post_status',FILTER_SANITIZE_STRING)){
 	    if (in_array($post_status, array('open','closed','trash','all'))){
 		$status = $post_status;
+		if($status=='open'){
+		    $status.=',publish';
+		}
 	    }
 	}
 	$meta_query = array();

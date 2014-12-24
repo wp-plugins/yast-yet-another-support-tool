@@ -99,6 +99,9 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.0.4 =
+* Display open AND publish tickets by default
+
 = 1.0.3 =
 * Found a way to display tickets with empty title
 
