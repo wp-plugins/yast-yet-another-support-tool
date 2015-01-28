@@ -19,7 +19,7 @@ The purpose is to manage a community of webmasters on a WP plateform, to give as
 #### Full integration
 
 * Custom categories to filter tickets
-* For logged-in users: a submit button in he admin bar
+* For logged-in users: a submit button in the admin bar
 * For every one: possibility to use a form (with shortcode). The form can assign tickets to a specific category.
 
 #### Here some usefull tools provided to help resolve tickets
@@ -98,6 +98,15 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 3. New ticket form
 
 == Changelog ==
+
+= 1.1.0 =
+* Add: Possibility to add a form in an external site
+* Add: Tickets can be displayed on front
+* Add: Option to force visibility in shortcode
+* Add: Form is now bootstrap ready
+* Notify every one concerned
+* Performances improvements
+* Some bug fix
 
 = 1.0.4 =
 * Display open AND publish tickets by default

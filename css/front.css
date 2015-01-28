@@ -1,0 +1,5 @@
+.yast_ticket_navigator ul,#ticket_comments ul,.ui-autocomplete{
+    list-style: none;
+    margin:0;
+    padding:0;
+}

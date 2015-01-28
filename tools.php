@@ -4,7 +4,14 @@ $YAST_tools=new YAST_tools();
 class YAST_tools {
 
     function YAST_tools() {
-	
+
+    }
+
+    function host($url){
+	if(false !== $url_attr = parse_url($url)){
+	    return $url_attr['host'];
+	}
+	return false;
     }
 
     function navigator($navigator = false) {
@@ -47,7 +54,7 @@ class YAST_tools {
 	    }
 	}
 	elseif (strpos($navigator, 'Ubuntu') !== FALSE) {
-	    $nav['os']['name'] = 'Ubuntu';
+	    $nav['os']['name'] = 'Linux';
 	}
 	elseif (strpos($navigator, 'Linux') !== FALSE) {
 	    $nav['os']['name'] = 'Linux';
@@ -71,7 +78,7 @@ class YAST_tools {
 	elseif (strpos($navigator, 'BlackBerry') !== FALSE) {
 	    $nav['os']['name'] = 'BlackBerry ';
 	}
-	
+
 /*
 	// BROWSER
 	if (strpos($navigator, 'WebKit') !== FALSE) {
@@ -83,7 +90,7 @@ class YAST_tools {
 	elseif (strpos($navigator, 'Trident') !== FALSE) {
 	    $nav['browser']['engine'] = 'trident';
 	}*/
-	
+
 	//
 	if (strpos($navigator, 'Firefox') !== FALSE) {
 	    $nav['browser']['name'] = 'Firefox';

@@ -1,4 +1,18 @@
+#yast_support_form{
+    display:none;
+    position: fixed;
+    top:5%;
+    right:5%;
+    height:90%;
+    width:60%;
+    overflow: auto;
+    padding:1em;
+    background:#FFF;
+    border:#999 1px solid;
+    z-index:9000;
+}
 
+/***********/
 
 .yast_alert{
     border:#9CA 1px solid;
@@ -28,6 +42,10 @@
 
 #report_ticketbox{
     display:none;
+}
+#report_ticketform{
+    padding: 1em 0;
+    clear:both;
 }
 #report_ticketform h3{
     font-weight: 900;
