@@ -2,7 +2,7 @@
 Contributors: bastho, n4thaniel
 Tags: ticket, support, wphelp, assistance, tickets, multisite
 Requires at least: 3.1
-Tested up to: 4.1.0
+Tested up to: 4.1.1
 Donate link: http://ba.stienho.fr/#don
 Stable tag: /trunk
 License: GPLv2
@@ -74,6 +74,40 @@ Some normal text, being stylized by the editor
 <radio ok (Ok?) "yes,no"> this question is very important !
 [/BugTickets_form]
 `
+### External website form
+
+You can oput a submission form in an external website. wtih 2 steps :
+
+1. Allow the remote host, in Support tickets > Options
+2. Insert the javascript file into a page of your remote site
+3. The form is hidden by default and can be opened by a button.
+
+Some details about this feature :
+
+the jascript URL looks like :
+//your-wp-site.com/wp-admin/admin-ajax.php?action=yast_form_js
+
+So, just put this ligne into your HTML:
+`
+<script src="//your-wp-site.com/wp-admin/admin-ajax.php?action=yast_form_js"></script>
+`
+
+Je javascript auto add a button to open the form, but you can use your own just by adding the class "yast-dist-support-button" a any HTML element.
+A click on an HTML element with class "yast-dist-support-button" will open the support form.
+
+You can cutomize the by by adding parameters to the script URL:
+
+* autoload: if set to "no", do not append the form to the body, but wait a click of the user
+* visibility: will force "private" or "public"
+* user: used to identify the reporter. can be a username, login or email
+* type: any ticket type defined in your WordPress
+* title: any string
+
+example:
+
+`
+<script src="//your-wp-site.com/wp-admin/admin-ajax.php?action=yast_form_js&autoload=no&visibility=private&type=bug&username=<?php $current_user['email']?>"></script>
+`
 
 
 ### Credits
@@ -98,6 +132,10 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 3. New ticket form
 
 == Changelog ==
+
+= 1.1.1 =
+* [external form by JS] add no_autoload option
+* [external form by JS] automaticly add button if needed
 
 = 1.1.0 =
 * Add: Possibility to add a form in an external site

@@ -1,4 +1,4 @@
-#yast_support_form{
+#yast-support-form{
     display:none;
     position: fixed;
     top:5%;
@@ -10,6 +10,17 @@
     background:#FFF;
     border:#999 1px solid;
     z-index:9000;
+}
+#yast-dist-support-button-generated{
+    display:block;
+    position: fixed;
+    top:5px;
+    right:5px;
+    background:#FFF;
+    color:#333;
+    padding:0.1em 0.5em;
+    z-index:9001;
+    cursor: help;
 }
 
 /***********/

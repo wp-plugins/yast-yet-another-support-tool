@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.1.0
+  Version: 1.1.1
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -1269,8 +1269,18 @@ class YAST_class {
 			<td><label for="trusted_hosts">
 			    <?php _e('Trusted hosts', 'yast') ?></label>
 			</td>
-			<td><textarea name="yast_options[trusted_hosts]" id="trusted_hosts"><?php echo implode("\n", $yast_options['trusted_hosts']) ?></textarea>
-				<br><?php _e('One host per line, without http://, Datas sent from these sites will be registered without verification', 'yast') ?></td>
+			<td><textarea name="yast_options[trusted_hosts]" id="trusted_hosts" cols="60"><?php echo implode("\n", $yast_options['trusted_hosts']) ?></textarea>
+			    <br><?php _e('One host per line, without http://, Datas sent from these sites will be registered without verification', 'yast') ?><br>
+			    <?php _e('To integrate a form in one of these sites, use one the following codes. YOu can customize form by changing the URL parameters.','yast') ?><br>
+			    <textarea cols="60" readonly>
+<!-- Basic YAST Form  -->
+<script src="<?php echo admin_url('admin-ajax.php') ?>?action=yast_form_js"></script>
+
+<!-- Custom YAST Form  -->
+<script src="<?php echo admin_url('admin-ajax.php') ?>?action=yast_form_js&autoload=no&visibility=private&username=anonymous&type=bug&title=Help%20I%20need%20somebody"></script>
+			    </textarea><br>
+			    <a href="https://wordpress.org/plugins/yast-yet-another-support-tool/" target="_blank"><?php _e('Click here to see more documentation about this feature.','yast') ?></a>
+			</td>
 		    </tr>
 
 
@@ -2421,6 +2431,8 @@ Issue link : %12$s', 'yast'),
 	?>
 var yast_head = document.head || document.getElementsByTagName('head')[0];
 var yast_cssLink;
+var yast_body;
+var yast_Element;
 
 yast_cssLink = document.createElement("link");
 yast_cssLink.href = "<?php echo str_replace(array('http:','https:'),'',plugins_url('/css/style.css', __FILE__)) ?>";
@@ -2464,18 +2476,46 @@ function contentLoaded(win, fn) {
         win[add](pre + 'load', init, false);
     }
 }
-
+function yast_pop_create(){
+    yast_Element = document.createElement('div');
+    yast_Element.id = 'yast-support-form';
+    yast_Element.innerHTML = "<button onclick=\"yast_pop_close()\" class=\"yast_pop_close_button button btn btn-default btn-sm pull-right\"><?php _e('Cancel','yast')?></button><?php echo $html ?>";
+    yast_body.appendChild(yast_Element);
+}
 function yast_pop_close(){
-    document.getElementById('yast_support_form').style.display='none';
+    document.getElementById('yast-support-form').style.display='none';
+}
+function yast_pop_open(){
+    if(!document.getElementById('yast-support-form')){
+	yast_pop_create();
+    }
+    if(document.getElementById('yast-support-form')){
+	document.getElementById('yast-support-form').style.display='block';
+	return;
+    }
 }
 
 contentLoaded(window, function(event) {
-    var yast_body = document.body || document.getElementsByTagName('body')[0];
-    var yast_Element;
-    yast_Element = document.createElement('div');
-    yast_Element.id = 'yast_support_form';
-    yast_Element.innerHTML = "<button onclick=\"yast_pop_close()\" class=\"yast_pop_close_button button btn btn-default btn-sm pull-right\"><?php _e('Cancel','yast')?></button><?php echo $html ?>";
-    yast_body.appendChild(yast_Element);
+    yast_body = document.body || document.getElementsByTagName('body')[0];
+
+    <?php if('no' != \filter_input(INPUT_GET, 'autoload')): ?>
+    yast_pop_create();
+    <?php endif; ?>
+    var yast_buttons = document.getElementsByClassName('yast-dist-support-button');
+    if(yast_buttons.length==0){
+	var yast_button = document.createElement('a');
+	yast_button.id = 'yast-dist-support-button-generated';
+	yast_button.setAttribute('class', 'yast-dist-support-button');
+	yast_button.innerHTML = "<?php _e('Support !','yast') ?>";
+	yast_body.appendChild(yast_button);
+	yast_buttons = document.getElementsByClassName('yast-dist-support-button');
+    }
+    for(i in yast_buttons){
+	yast_buttons[i].onclick=function(){
+	    yast_pop_open();
+	    return false;
+	}
+    }
 });
 	<?php
 	exit;

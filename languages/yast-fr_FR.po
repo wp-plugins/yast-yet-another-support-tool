@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Bug Tickets\n"
-"POT-Creation-Date: 2015-01-28 17:06+0100\n"
-"PO-Revision-Date: 2015-01-28 17:07+0100\n"
+"POT-Creation-Date: 2015-01-29 16:02+0100\n"
+"PO-Revision-Date: 2015-01-29 16:03+0100\n"
 "Last-Translator: Bastien Ho <bastienho@urbancube.fr>\n"
 "Language-Team: bastho <bastienho@urbancube.fr>\n"
 "Language: fr_FR\n"
@@ -15,15 +15,19 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPath-1: .\n"
 
+#: ../archive-yast.php:15
+msgid "Recent public tickets"
+msgstr "Ticket publics récents"
+
 #: ../single-yast.php:4
 msgid "Not ticket here, this is an error..."
 msgstr "Pas de ticket ici, c'est une erreur..."
 
-#: ../yast.php:96 ../yast.php:636 ../yast.php:857
+#: ../yast.php:96 ../yast.php:640 ../yast.php:861
 msgid "Open"
 msgstr "Ouvert"
 
-#: ../yast.php:104 ../yast.php:637 ../yast.php:858
+#: ../yast.php:104 ../yast.php:641 ../yast.php:862
 msgid "Closed"
 msgstr "Cloturé"
 
@@ -51,7 +55,7 @@ msgstr "Editer"
 msgid "Edit ticket"
 msgstr "Editer le ticket"
 
-#: ../yast.php:130 ../yast.php:647
+#: ../yast.php:130 ../yast.php:651
 msgid "New ticket"
 msgstr "Nouveau Ticket"
 
@@ -123,7 +127,7 @@ msgstr "Le ticket a été cloturé"
 msgid "Ticket has been moved to trash"
 msgstr "Le ticket a été déplacé à la corbeille"
 
-#: ../yast.php:197 ../yast.php:630 ../yast.php:2506
+#: ../yast.php:197 ../yast.php:634 ../yast.php:2550
 msgid "Support Tickets"
 msgstr "Tickets Support"
 
@@ -135,7 +139,7 @@ msgstr "Options"
 msgid "hour"
 msgstr "heure"
 
-#: ../yast.php:217 ../yast.php:818
+#: ../yast.php:217 ../yast.php:822
 msgid "hours"
 msgstr "heures"
 
@@ -143,7 +147,7 @@ msgstr "heures"
 msgid "minute"
 msgstr "minute"
 
-#: ../yast.php:219 ../yast.php:400 ../yast.php:819
+#: ../yast.php:219 ../yast.php:400 ../yast.php:823
 msgid "minutes"
 msgstr "minutes"
 
@@ -151,7 +155,7 @@ msgstr "minutes"
 msgid "No time lost"
 msgstr "Pas de temps perdu"
 
-#: ../yast.php:227 ../yast.php:1147
+#: ../yast.php:227 ../yast.php:1151
 msgid "None"
 msgstr "Aucun"
 
@@ -180,7 +184,7 @@ msgstr "Informations"
 msgid "Process"
 msgstr "Traiter"
 
-#: ../yast.php:361 ../yast.php:399 ../yast.php:665
+#: ../yast.php:361 ../yast.php:399 ../yast.php:669
 msgid "Spent time"
 msgstr "Temps passé"
 
@@ -205,7 +209,7 @@ msgstr "Pour information, vous avez ouvert cette page il y a %s."
 msgid "Send"
 msgstr "Envoyer"
 
-#: ../yast.php:417 ../yast.php:873
+#: ../yast.php:417 ../yast.php:877
 msgid "Technical details"
 msgstr "Détails techniques"
 
@@ -213,173 +217,173 @@ msgstr "Détails techniques"
 msgid "Delete this ticket ?"
 msgstr "Supprimer ce ticket ?"
 
-#: ../yast.php:635
+#: ../yast.php:639
 msgid "All"
 msgstr "Tous"
 
-#: ../yast.php:638
+#: ../yast.php:642
 msgid "Trash"
 msgstr "Corbeille"
 
-#: ../yast.php:657
+#: ../yast.php:661
 msgid "Title"
 msgstr "Titre"
 
-#: ../yast.php:658
+#: ../yast.php:662
 msgid "Type"
 msgstr "Type"
 
-#: ../yast.php:659
+#: ../yast.php:663
 msgid "Page"
 msgstr "Page"
 
-#: ../yast.php:660
+#: ../yast.php:664
 msgid "Priority"
 msgstr "Priorité"
 
-#: ../yast.php:661
+#: ../yast.php:665
 msgid "Assigned"
 msgstr "Assigné"
 
-#: ../yast.php:662
+#: ../yast.php:666
 msgid "User"
 msgstr "Utilisat-eur/rice"
 
-#: ../yast.php:663
+#: ../yast.php:667
 msgid "Date"
 msgstr "Date"
 
-#: ../yast.php:664
+#: ../yast.php:668
 msgid "Answers"
 msgstr "Réponses"
 
-#: ../yast.php:666 ../yast.php:828
+#: ../yast.php:670 ../yast.php:832
 msgid "Status"
 msgstr "Status"
 
-#: ../yast.php:667
+#: ../yast.php:671
 msgid "Actions"
 msgstr "Actions"
 
-#: ../yast.php:713 ../yast.php:985 ../yast.php:2285
+#: ../yast.php:717 ../yast.php:989 ../yast.php:2299
 msgid "Private"
 msgstr "Privé"
 
-#: ../yast.php:724
+#: ../yast.php:728
 msgid "Close"
 msgstr "Cloturer"
 
-#: ../yast.php:733
+#: ../yast.php:737
 msgid "Re-Open"
 msgstr "Ré-Ouvrir"
 
-#: ../yast.php:742
+#: ../yast.php:746
 msgid "Delete"
 msgstr "Supprimer"
 
-#: ../yast.php:773
+#: ../yast.php:777
 msgid "Low"
 msgstr "Bas"
 
-#: ../yast.php:774
+#: ../yast.php:778
 msgid "Normal"
 msgstr "Normal"
 
-#: ../yast.php:775
+#: ../yast.php:779
 msgid "High"
 msgstr "Haut"
 
-#: ../yast.php:776
+#: ../yast.php:780
 msgid "Critical"
 msgstr "Critique"
 
-#: ../yast.php:820
+#: ../yast.php:824
 msgid "seconds"
 msgstr "secondes"
 
-#: ../yast.php:829
+#: ../yast.php:833
 msgid "Level"
 msgstr "Niveau"
 
-#: ../yast.php:852
+#: ../yast.php:856
 msgid "Status:"
 msgstr "Status :"
 
-#: ../yast.php:862
+#: ../yast.php:866
 msgid "Go back to ticket"
 msgstr "Retourner au ticket"
 
-#: ../yast.php:874
+#: ../yast.php:878
 msgid "Reporter"
 msgstr "Rapport-eur/se"
 
-#: ../yast.php:988 ../yast.php:2284
+#: ../yast.php:992 ../yast.php:2298
 msgid "Public"
 msgstr "Publique"
 
-#: ../yast.php:1024
+#: ../yast.php:1028
 msgid "Merged tickets :"
 msgstr "Tickets fusionnés :"
 
-#: ../yast.php:1063
+#: ../yast.php:1067
 msgid "Assigned to:"
 msgstr "Assigné à :"
 
-#: ../yast.php:1072
+#: ../yast.php:1076
 msgid "Assign"
 msgstr "Assigner"
 
-#: ../yast.php:1073
+#: ../yast.php:1077
 msgid "Change"
 msgstr "Changer"
 
-#: ../yast.php:1081
+#: ../yast.php:1085
 msgid "Merge with another ticket"
 msgstr "Fusionner avec un autre ticket"
 
-#: ../yast.php:1089
+#: ../yast.php:1093
 #, php-format
 msgid "Merged with ticket #%d : %s"
 msgstr "Fusionné avec le ticket #%d : %s"
 
-#: ../yast.php:1112
+#: ../yast.php:1116
 msgid "Environment"
 msgstr "Environement"
 
-#: ../yast.php:1113
+#: ../yast.php:1117
 msgid "User Agent:"
 msgstr "User agent :"
 
-#: ../yast.php:1119
+#: ../yast.php:1123
 msgid "Public URL"
 msgstr "URL publique"
 
-#: ../yast.php:1121
+#: ../yast.php:1125
 msgid "Case URL"
 msgstr "URL du cas"
 
-#: ../yast.php:1127
+#: ../yast.php:1131
 msgid "No POST variables"
 msgstr "Pas de variables POST"
 
-#: ../yast.php:1148
+#: ../yast.php:1152
 msgid "Open tickets"
 msgstr "Tickets ouverts"
 
-#: ../yast.php:1156
+#: ../yast.php:1160
 msgid "Closed tickets"
 msgstr "Tickets fermés"
 
-#: ../yast.php:1178 ../yast.php:1444 ../yast.php:1818 ../yast.php:1856
-#: ../yast.php:1877
+#: ../yast.php:1182 ../yast.php:1458 ../yast.php:1832 ../yast.php:1870
+#: ../yast.php:1891
 msgid "Security error"
 msgstr "Erreur de sécurité"
 
-#: ../yast.php:1210
+#: ../yast.php:1214
 msgid "YAST Support-Tickets options saved !"
 msgstr "Les options de tickets support ont bien été sauvegardées !"
 
-#: ../yast.php:1216
+#: ../yast.php:1220
 msgid ""
 "Do you really want to autorize any form of this webiste to send datas to "
 "YAST ? This might be a big security issue !"
@@ -387,43 +391,43 @@ msgstr ""
 "Voulez vous vraiment autoriser tout formulaire de ce site même à envoyer des "
 "données à YAST ? ça peut être une grosse faille de sécurité !"
 
-#: ../yast.php:1222
+#: ../yast.php:1226
 msgid "Support Tickets Options"
 msgstr "Options de tickets support"
 
-#: ../yast.php:1228
+#: ../yast.php:1232
 msgid "Alerts"
 msgstr "Alertes"
 
-#: ../yast.php:1232
+#: ../yast.php:1236
 msgid "Send email alert to:"
 msgstr "Envoyer une alerte courriel à :"
 
-#: ../yast.php:1237
+#: ../yast.php:1241
 msgid "Support Form"
 msgstr "Formulaire de support"
 
-#: ../yast.php:1241
+#: ../yast.php:1245
 msgid "Ticket type to use in adminbar"
 msgstr "Type de ticket dans la bar d'administration"
 
-#: ../yast.php:1256
+#: ../yast.php:1260
 msgid "Force SSL"
 msgstr "Forcer SSL"
 
-#: ../yast.php:1259
+#: ../yast.php:1263
 msgid "No"
 msgstr "Non"
 
-#: ../yast.php:1260
+#: ../yast.php:1264
 msgid "Yes"
 msgstr "Oui"
 
-#: ../yast.php:1266
+#: ../yast.php:1270
 msgid "Trusted hosts"
 msgstr "Serveurs de confiance"
 
-#: ../yast.php:1269
+#: ../yast.php:1273
 msgid ""
 "One host per line, without http://, Datas sent from these sites will be "
 "registered without verification"
@@ -431,23 +435,37 @@ msgstr ""
 "Un nom de serveur par ligne, sans http://. Les données envoyées depuis ces "
 "sites seront enregistrées sans vérification"
 
-#: ../yast.php:1275
+#: ../yast.php:1274
+msgid ""
+"To integrate a form in one of these sites, use one the following codes. YOu "
+"can customize form by changing the URL parameters."
+msgstr ""
+"Pour intégrer un formulaire dans un de ces sites, utilisez un des codes "
+"suivant. Vous pouvez personnaliser les formulaire en changeant les "
+"paramètres dans l'URL."
+
+#: ../yast.php:1282
+msgid "Click here to see more documentation about this feature."
+msgstr ""
+"Cliquez ici pour voir plus de documentation à propos de cette fonctionnalité"
+
+#: ../yast.php:1289
 msgid "Multisite"
 msgstr "Multisite"
 
-#: ../yast.php:1279
+#: ../yast.php:1293
 msgid "Use this site as Support site"
 msgstr "Utiliser ce site comme site de support"
 
-#: ../yast.php:1298
+#: ../yast.php:1312
 msgid "Apply settings"
 msgstr "Appliquer les changements"
 
-#: ../yast.php:1456
+#: ../yast.php:1470
 msgid "An error occured !"
 msgstr "Une erreur est survenue !"
 
-#: ../yast.php:1471
+#: ../yast.php:1485
 #, php-format
 msgid ""
 "Support Ticket merge width ticket #%d : %s\n"
@@ -456,7 +474,7 @@ msgstr ""
 "Ticket fusionné avec le ticket #%d : %s\n"
 "%s"
 
-#: ../yast.php:1509
+#: ../yast.php:1523
 #, php-format
 msgid ""
 "Congratulations !\n"
@@ -503,28 +521,28 @@ msgstr ""
 "\n"
 "Lien du ticket : %12$s"
 
-#: ../yast.php:1548 ../yast.php:1739 ../yast.php:2094
+#: ../yast.php:1562 ../yast.php:1753 ../yast.php:2108
 #, php-format
 msgid "[Support Ticket] #%d"
 msgstr "[Tickets Support] #%d"
 
-#: ../yast.php:1554
+#: ../yast.php:1568
 msgid "Error while assigning"
 msgstr "Erreur pendant l'assignement"
 
-#: ../yast.php:1558
+#: ../yast.php:1572
 msgid "Missing parameters"
 msgstr "Paramètres manquants"
 
-#: ../yast.php:1593
+#: ../yast.php:1607
 msgid "Anonymous user"
 msgstr "Utilisateur anonyme"
 
-#: ../yast.php:1708 ../yast.php:1847
+#: ../yast.php:1722 ../yast.php:1861
 msgid "What are you doing here ?"
 msgstr "Que faites vous ici ?"
 
-#: ../yast.php:1739
+#: ../yast.php:1753
 #, php-format
 msgid ""
 "A new comment has been posted by %4$s.\n"
@@ -543,51 +561,51 @@ msgstr ""
 "--\n"
 "Lien du ticket : %3$s\n"
 
-#: ../yast.php:1770
+#: ../yast.php:1784
 msgid "Comment is synchronised with the technical server."
 msgstr "Le commentaire n'a pas pu être synchronisé avec le serveur technique"
 
-#: ../yast.php:1775
+#: ../yast.php:1789
 msgid "Comment could'nt be synchronised with the technical server."
 msgstr "Le commentaire n'a pas pu être synchronisé avec le serveur technique"
 
-#: ../yast.php:1791
+#: ../yast.php:1805
 msgid "Comment is synchronised with the client."
 msgstr "Le commentaire est synchronisé avec le client"
 
-#: ../yast.php:1796
+#: ../yast.php:1810
 msgid "Comment could'nt be synchronised with the client."
 msgstr "Le commentaire n'a pas pu être synchronisé avec le client"
 
-#: ../yast.php:1840
+#: ../yast.php:1854
 msgid "Missing ticket ID"
 msgstr "Identifiant de ticket manquant"
 
-#: ../yast.php:1886
+#: ../yast.php:1900
 msgid "Support Ticket changed"
 msgstr "Ticket support modifié"
 
-#: ../yast.php:1888
+#: ../yast.php:1902
 msgid "Support Ticket closed"
 msgstr "Tickets Support cloturé"
 
-#: ../yast.php:1891
+#: ../yast.php:1905
 msgid "Support Ticket re-opened"
 msgstr "Ticket support ré-ouvert"
 
-#: ../yast.php:1911
+#: ../yast.php:1925
 msgid "Missing content... What did you want to do ?"
 msgstr "Contenu manquant... Que vouliez vous faire ?"
 
-#: ../yast.php:1944
+#: ../yast.php:1958
 msgid "Capabilities error !"
 msgstr "Erreur de droits !"
 
-#: ../yast.php:2005
+#: ../yast.php:2019
 msgid "Could'nt create ticket !"
 msgstr "Le ticket n'a pu être créé !"
 
-#: ../yast.php:2051
+#: ../yast.php:2065
 #, php-format
 msgid ""
 "[Support Ticket] New ticket report from %1$s (%2$s)\n"
@@ -632,88 +650,88 @@ msgstr ""
 "\n"
 "Lien du ticket : %12$s"
 
-#: ../yast.php:2085 ../yast.php:2226
+#: ../yast.php:2099 ../yast.php:2240
 msgid "Report succesfully registered !"
 msgstr "Signalement envoyé avec succès !"
 
-#: ../yast.php:2096
+#: ../yast.php:2110
 msgid "An e-mail has been sent"
 msgstr "Un courriel a été envoyé"
 
-#: ../yast.php:2122
+#: ../yast.php:2136
 msgid "Report is synchronised with the technical server."
 msgstr "Le rapport est synchronisé avec le serveur technique"
 
-#: ../yast.php:2125
+#: ../yast.php:2139
 msgid "Report could'nt be synchronised with the technical server."
 msgstr "Le rapport n'a pas pu être synchronisé avec le serveur technique"
 
-#: ../yast.php:2199
+#: ../yast.php:2213
 #, php-format
 msgid "Hi %s! Do you want to open a ticket about this page ?"
 msgstr "Salut %s! Voulez vous ouvrir un ticket à propos de cette page ?"
 
-#: ../yast.php:2244
+#: ../yast.php:2258
 msgid "From:"
 msgstr "De:"
 
-#: ../yast.php:2252
+#: ../yast.php:2266
 msgid "Priority:"
 msgstr "Priorité :"
 
-#: ../yast.php:2262
+#: ../yast.php:2276
 msgid "Report type:"
 msgstr "Type de signalement :"
 
-#: ../yast.php:2282
+#: ../yast.php:2296
 msgid "Visibility:"
 msgstr "Visibilité :"
 
-#: ../yast.php:2293
+#: ../yast.php:2307
 msgid "Why do you  open a ticket ?"
 msgstr "Pourquoi ouvrez vous un ticket ?"
 
-#: ../yast.php:2296
+#: ../yast.php:2310
 msgid "Title:"
 msgstr "Titre :"
 
-#: ../yast.php:2303
+#: ../yast.php:2317
 msgid "Description:"
 msgstr "Description :"
 
-#: ../yast.php:2340
+#: ../yast.php:2354
 msgid "Technical details:"
 msgstr "Détails techniques :"
 
-#: ../yast.php:2341
+#: ../yast.php:2355
 msgid "These informations will be sent with your report:"
 msgstr "Ces informations vont être envoyées avec votre signalement :"
 
-#: ../yast.php:2347
+#: ../yast.php:2361
 msgid "Page URL:"
 msgstr "URL de la page :"
 
-#: ../yast.php:2355
+#: ../yast.php:2369
 msgid "Variables:"
 msgstr "Variables :"
 
-#: ../yast.php:2363
+#: ../yast.php:2377
 msgid "Navigator:"
 msgstr "Navigateur :"
 
-#: ../yast.php:2371
+#: ../yast.php:2385
 msgid "Submit"
 msgstr "Envoyer"
 
-#: ../yast.php:2473
+#: ../yast.php:2482
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../yast.php:2513 ../yast.php:2518
+#: ../yast.php:2509 ../yast.php:2557 ../yast.php:2562
 msgid "Support !"
 msgstr "Support !"
 
-#: ../yast.php:2516
+#: ../yast.php:2560
 msgid "Contact technical support"
 msgstr "Contacter le support tecnhique"
 
@@ -752,9 +770,6 @@ msgstr "Contacter le support tecnhique"
 
 #~ msgid "Browser:"
 #~ msgstr "Navigateur :"
-
-#~ msgid "Remote tickets"
-#~ msgstr "Ticket du serveur distant"
 
 #~ msgid "Standalone"
 #~ msgstr "Autonome"
