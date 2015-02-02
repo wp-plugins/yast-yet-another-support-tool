@@ -81,7 +81,7 @@ jQuery(document).ready(function(){
 			ticket_id:jQuery('#yast_assigned').data('id'),
 			assign:jQuery('#yast_assigned').val()
 		};
-		jQuery.get(ajaxurl, datas, function(retour) {
+		jQuery.get(yast.ajaxurl, datas, function(retour) {
 			jQuery('#yast_assigned, #yast_reassigne').hide();
 			jQuery('#yast_assigne').show();
 			jQuery('#yast_assigneto').html(retour);
@@ -94,7 +94,7 @@ jQuery(document).ready(function(){
 			action:'yastselect',
 			ticket_id:jQuery('#yast_merge').data('id')
 		};
-		jQuery.get(ajaxurl, datas, function(retour) {
+		jQuery.get(yast.ajaxurl, datas, function(retour) {
 			jQuery('#yast_merge').html(retour);
 			jQuery('#yast_merge select').change(function(){
 				jQuery(this).hide(500);
@@ -105,7 +105,7 @@ jQuery(document).ready(function(){
 					post_parent:jQuery(this).val()
 				};
 				console.log(datas);
-				jQuery.post(ajaxurl, datas, function(retour) {
+				jQuery.post(yast.ajaxurl, datas, function(retour) {
 					jQuery('#yast_merge').html(retour);
 				},'html');
 			});

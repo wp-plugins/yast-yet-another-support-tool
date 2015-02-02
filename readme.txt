@@ -133,6 +133,9 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.1.3 =
+* [Single] fix ajax url bug
+
 = 1.1.2 =
 * [Single] add standalone display option with bootstrap support
 
