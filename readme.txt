@@ -133,6 +133,9 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.1.2 =
+* [Single] add standalone display option with bootstrap support
+
 = 1.1.1 =
 * [external form by JS] add no_autoload option
 * [external form by JS] automaticly add button if needed

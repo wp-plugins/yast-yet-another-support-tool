@@ -160,11 +160,35 @@
     display:none;
 }
 #ticket_comments li.comment{
-    padding:0.6em;
+    padding:0.6em 0.6em 2em;
     margin:0;
+    border-top:#888 1px solid;
 }
 #ticket_comments li time, #ticket_comments li .commentmetadata{
     float:right;
+}
+#ticket_comments .comment-author{
+    background: #999;
+    border:#CCC 4px solid;
+    display: block;
+    width:70px;
+    height:70px;
+    border-radius:35px;
+    text-align: center;
+    overflow: hidden;
+    margin-top:-20px;
+    float:left;
+}
+#ticket_comments .comment-author cite.fn{
+    display: block;
+    padding-top: 15px;
+}
+#ticket_comments .comment-author span.says{
+    display: none;
+}
+#ticket_comments .comment-body p{
+    padding:0.3em 1em 0.5em 2em;
+    clear:both;
 }
 
 

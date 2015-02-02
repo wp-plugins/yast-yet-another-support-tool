@@ -44,8 +44,12 @@ jQuery(document).ready(function(){
 
 
 	jQuery('#yast_comment_link').click(function(){
-		jQuery('#yast_comment').show();
+		jQuery('#yast_comment').show(500);
 	});
+        jQuery('#yast_comment_link_off').click(function(){
+		jQuery('#yast_comment').hide(500);
+	});
+
 	jQuery('#bug_preview_link').click(function(){
 		jQuery('#bug_preview_iframe').animate({height:'500px'});
 	});
@@ -84,7 +88,7 @@ jQuery(document).ready(function(){
 
 		},'text');
 	});
-	jQuery('#yast_merge button').click(function(){
+	jQuery('#yast_merge_button').click(function(){
 		jQuery(this).hide(500);
 		var datas={
 			action:'yastselect',

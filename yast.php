@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.1.1
+  Version: 1.1.2
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -331,7 +331,7 @@ class YAST_class {
 	    <div class="icon32" id="icon-yast"><br></div>
 	    <h2><?php _e('Support ticket', 'yast'); ?> <?php echo  $ticket->ID ?>
 		<?php if (is_super_admin()): ?>
-		<a href="<?php echo admin_url() ?>/post.php?post=<?php echo $ticket->ID?>&action=edit&referer=" class="button"><?php _e('Edit ticket', 'yast'); ?></a>
+		<a href="<?php echo admin_url() ?>/post.php?post=<?php echo $ticket->ID?>&action=edit&referer=" class="button btn btn-default"><?php _e('Edit ticket', 'yast'); ?></a>
 		<?php endif; ?>
 	    </h2>
 	    <div  id="poststuff">
@@ -387,26 +387,27 @@ class YAST_class {
 		if (isset($_GET['confirm_reply'])) {
 		    $this->single_action_button($ticket->ID,'closed',__('Close this ticket ?', 'yast'));
 		} ?>
-	    		<a id="yast_comment_link"><?php _e('Reply to this ticket', 'yast') ?></a>
+	    		<a id="yast_comment_link" class="button button-primary btn btn-sm btn-primary"><?php _e('Reply to this ticket', 'yast') ?></a>
 	    		<form action="<?php echo admin_url() ?>admin-post.php?token=<?php echo $ticket->token ?>" method="post" id="yast_comment">
 				<?php wp_nonce_field('ticket_comment', 'ticket_comment'); ?>
 	    		    <input type="hidden" name="action" value="yastupdate">
 	    		    <input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer'] . '#sent') ?>">
 	    		    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 					<?php if (is_super_admin()): ?>
-				    <p>
-					<label>
-		<?php _e('Spent time', 'yast') ?>
-					    <input type="number" step="1" min="0" name="spent_time" id="spent_time_text"><?php _e('minutes', 'yast') ?><br>
-		<?php printf(__("For information, you've opened this page %s ago.", 'yast'), '<a id="yast_realtime"></a>') ?>
+			    <div>
+				<label for="spent_time_text">
+				<?php _e('Spent time', 'yast') ?></label>
+				<div class="input-group">
+					<input type="number" step="1" min="0" name="spent_time" id="spent_time_text" class="form-control">
+					<span class="input-group-addon"><?php _e('minutes', 'yast') ?></span>
+				</div>
+				<?php printf(__("For information, you've opened this page %s ago.", 'yast'), '<a id="yast_realtime"></a>') ?>
 
-					</label>
-
-
-				    </p>
+			    </div>
 			    <?php endif; ?>
 	    <?php wp_editor("", 'message', array('teeny' => true)); ?>
-	    		    <input type="submit" class="button-primary" value="<?php _e('Send', 'yast') ?>">
+			    <a id="yast_comment_link_off" class="button button-default btn btn-default"><?php _e('Cancel', 'yast') ?></a>
+	    		    <input type="submit" class="button button-primary btn btn-primary" value="<?php _e('Send', 'yast') ?>">
 	    		</form>
 	<?php endif;endif; ?>
 		    </div>
@@ -439,6 +440,13 @@ class YAST_class {
 	if(!$this->can_edit($ticket)){
 	    return;
 	}
+	$style='primary';
+	if($status=='trash'){
+	    $style='warning';
+	}
+	if($status=='closed'){
+	    $style='danger';
+	}
 	?>
 	    <form action="<?php echo admin_url() ?>admin-post.php?token=<?php echo $ticket->token ?>" method="post" id="<?php echo $status?>" class="yast_<?php echo $status?>">
 		<?php wp_nonce_field($nonce, $nonce); ?>
@@ -446,7 +454,7 @@ class YAST_class {
 		<input type="hidden" name="referer" value="<?php echo (\filter_input(INPUT_GET,'referer',FILTER_SANITIZE_URL)?:'') ?>">
 		<input type="hidden" name="ticket" value="<?php echo $ticket_id ?>">
 		<input type="hidden" name="post_status" value="<?php echo $status?>">
-		<input type="submit" value="<?php echo $label ?>" class="button">
+		<input type="submit" value="<?php echo $label ?>" class="button button-<?php echo $style ?> btn btn-<?php echo $style ?>">
 	    </form>
 	<?php
     }
@@ -794,7 +802,6 @@ class YAST_class {
 	wp_enqueue_style('yast-font-ie7', plugins_url('/css/yast-icomoon-ie7.css', __FILE__), false, null);
 	$wp_styles->add_data('yast-font-ie7', 'conditional', 'IE 7');
 
-
 	wp_enqueue_script('yast', plugins_url('/js/front.js', __FILE__), array('jquery'), false, true);
 	$ajaxurl = admin_url('admin-ajax.php');
 	if ($this->options['force_ssl'] == 1) {
@@ -1082,7 +1089,7 @@ class YAST_class {
 		<li id="yast_merge" data-id="<?php echo  $ticket->ID ?>">
 
 	<?php if (is_super_admin() && $ticket->post_parent == 0) { ?>
-	    	    <button><?php _e('Merge with another ticket', 'yast') ?></button>
+	    	    <a id="yast_merge_button" class="button button-default btn btn-sm btn-default"><?php _e('Merge with another ticket', 'yast') ?></a>
 	<?php
 	}
 	else {
@@ -1304,6 +1311,19 @@ class YAST_class {
 	    		</select></td>
 		    </tr>
 		    <?php endif; ?>
+
+		    <tr>
+			<td colspan="2"><h3><?php _e('Displaying', 'yast'); ?></h3></td>
+		    </tr>
+		    <tr>
+			<td><label for="display_single_in_theme">
+			<?php _e('Display tickets on front in the theme', 'yast') ?></label>
+			</td>
+			<td><select id="display_single_in_theme" name="yast_options[display_single_in_theme]">
+			    <option value="0" <?php selected( $yast_options['display_single_in_theme'], 0 ); ?>><?php _e('Nope','yast') ?></option>
+			    <option value="1" <?php selected( $yast_options['display_single_in_theme'], 1 ); ?>><?php _e('Yope','yast') ?></option>
+	    		</select></td>
+		    </tr>
 		</table>
 
 
@@ -1389,6 +1409,10 @@ class YAST_class {
 		    ),
 		    'trusted_hosts' => array(
 			'default' => '',
+			'filter' => FILTER_SANITIZE_NUMBER_INT
+		    ),
+		    'display_single_in_theme' => array(
+			'default' => 1,
 			'filter' => FILTER_SANITIZE_NUMBER_INT
 		    ),
 		)
@@ -1757,7 +1781,7 @@ Comment:
 
 --
 Issue link : %3$s
-', 'yast'), $ticket->post_title, strip_tags($message), email_exists($dest) ? $ticket->lien : $ticket->front_link, $this->display_user($user_name, false)), $headers
+', 'yast'), $ticket->post_title, strip_tags($message), $ticket->front_link, $this->display_user($user_name, false)), $headers
 		    );
 		}
 
