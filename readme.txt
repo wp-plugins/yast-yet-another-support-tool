@@ -74,8 +74,10 @@ Some normal text, being stylized by the editor
 <radio ok (Ok?) "yes,no"> this question is very important !
 [/BugTickets_form]
 `
-### External website form
 
+<a id="external">
+### External website form
+</a>
 You can oput a submission form in an external website. wtih 2 steps :
 
 1. Allow the remote host, in Support tickets > Options
@@ -132,6 +134,14 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 3. New ticket form
 
 == Changelog ==
+
+= 1.2.0 =
+* [List] filter by ticket type
+* [List] better responsiveness
+* [Notifications] more verbose titles
+* [Notifications] use username in email of creation confirmation
+* [Options] improved UI
+* [Localization] update french locale
 
 = 1.1.3 =
 * [Single] fix ajax url bug

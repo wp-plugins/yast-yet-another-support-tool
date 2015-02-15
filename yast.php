@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.1.3
+  Version: 1.2.0
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -555,6 +555,7 @@ class YAST_class {
 		}
 	    }
 	}
+	$type = \filter_input(INPUT_GET, 'ticket_type');
 	$meta_query = array();
 	$user_id = get_current_user_id();
 	if (
@@ -593,7 +594,8 @@ class YAST_class {
 	    'posts_per_page' => $pages,
 	    'paged' => $paged,
 	    'meta_query' => $meta_query,
-	    'orderby' => $orderby
+	    'orderby' => $orderby,
+	    'ticket_type'=>$type
 	);
 	if (is_multisite()){
 	    restore_current_blog();
@@ -627,8 +629,8 @@ class YAST_class {
 	    switch_to_blog($this->options['support_site']);
 	}
 
-	$status = ( isset($_GET['post_status'])  && in_array($_GET['post_status'], array('open','closed','trash')) ) ? $_GET['post_status'] : 'open';
-
+	$status = ( isset($_GET['post_status'])  && in_array($_GET['post_status'], array('all','open','closed','trash')) ) ? $_GET['post_status'] : 'open';
+	$ticket_type = \filter_input(INPUT_GET, 'ticket_type');
 	$tickets = new WP_query($this->query());
 
 	if (is_multisite()){
@@ -636,47 +638,99 @@ class YAST_class {
 	}
 
 	$levels = $this->levels();
+
+	$types = $this->default_types();
 	?>
 	<div class="wrap">
 	    <div class="icon32" id="icon-yast"><br></div>
-	    <h2><?php _e('Support Tickets', 'socialmap'); ?></h2>
-	    <table class="widefat">
-		<tr>
-		    <td colspan=11">
-			<nav>
-			    <a href="admin.php?page=yast_list&post_status=all"><?php _e('All', 'yast') ?></a>
-			    <a href="admin.php?page=yast_list&post_status=open"><?php _e('Open', 'yast') ?></a>
-			    <a href="admin.php?page=yast_list&post_status=closed"><?php _e('Closed', 'yast') ?></a>
-			    <a href="admin.php?page=yast_list&post_status=trash"><?php _e('Trash', 'yast') ?></a>
+	    <h2><?php _e('Support Tickets', 'yast'); ?></h2>
 
-			</nav>
-		    </td>
+	    <table class="widefat tickets">
+		<tr>
 		    <td>
+			<form action="" method="get">
+			<input type="hidden" name="page" value="yast_list">
+			    <select name="post_status">
+				<option value="all" <?php selected('all',$status) ?>><?php _e('All', 'yast') ?></option>
+				<option value="open" <?php selected('open',$status) ?>><?php _e('Open', 'yast') ?></option>
+				<option value="closed" <?php selected('closed',$status) ?>><?php _e('Closed', 'yast') ?></option>
+				<option value="trash" <?php selected('trash',$status) ?>><?php _e('Trash', 'yast') ?></option>
+			    </select>
+			    <select name="ticket_type">
+				<option value=""><?php _e('All ticket types', 'yast') ?></option>
+				<?php foreach ($types as $type): ?>
+				<option value="<?php echo $type->slug ?>" <?php selected($ticket_type,$type->slug) ?>><?php echo $type->name ?></option>
+				    <?php if (sizeof($type->children) > 0): ?>
+				    <?php foreach ($type->children as $child): ?>
+				    <option value="<?php echo $child->slug ?>" <?php selected($ticket_type,$child->slug) ?>><?php echo $type->name ?>/<?php echo $child->name ?></option>
+				    <?php endforeach ?>
+				    <?php else: ?>
+				    <?php endif ?>
+				<?php endforeach ?>
+			    </select>
+			    <button type="submit" class="button button-default">
+				<span class="dashicons dashicons-yes"> </span>
+				<span class="column-label"><?php _e('Filter', 'yast') ?></span>
+			    </button>
+			</form>
+		    </td>
+		    <td class="column-ticket-info">
+			<nav>
 			<?php $this->liste_paginate($tickets); ?>
+			</nav>
 		    </td>
 		    <td align="right">
 	<?php if (is_super_admin()) : ?>
-	    		<a href="#TB_inline?width=600&height=400&inlineId=report_ticketbox" class="thickbox button button-primary"><?php _e('New ticket', 'yast') ?></a>
+	    		<a href="#TB_inline?width=600&height=400&inlineId=report_ticketbox" class="thickbox button button-primary">
+			    <span class="dashicons dashicons-plus"> </span>
+			    <span class="column-label"><?php _e('New ticket', 'yast') ?></span>
+			</a>
 	<?php endif; ?>
 		    </td>
 		</tr>
 	    </table>
-	    <table id="yast_list" class="widefat">
+	    <table id="yast_list" class="widefat tickets fixed">
 
 		<thead>
-
 		    <tr>
-			<th><span class="icon-yast-bug"></span>&nbsp;<?php _e('Title', 'yast') ?></th>
-			<th><span class="dashicons dashicons-tag"></span>&nbsp;<?php _e('Type', 'yast') ?></th>
-			<th><span class="dashicons dashicons-admin-links"></span>&nbsp;<?php _e('Page', 'yast') ?></th>
-			<th><span class="dashicons dashicons-info"></span>&nbsp;<?php _e('Priority', 'yast') ?></th>
-			<th><span class="dashicons dashicons-admin-users"></span>&nbsp;<?php _e('Assigned', 'yast') ?></th>
-			<th><span class="dashicons dashicons-admin-users"></span>&nbsp;<?php _e('User', 'yast') ?></th>
-			<th><span class="dashicons dashicons-calendar"></span>&nbsp;<?php _e('Date', 'yast') ?></th>
-			<th><span class="dashicons dashicons-admin-comments" title="<?php _e('Answers', 'yast') ?>"></span></th>
-			<th><?php echo  (is_super_admin() ? '<span class="dashicons dashicons-backup" title="'.__('Spent time', 'yast').'"></span>' : '') ?></th>
-			<th colspan="2"><?php _e('Status', 'yast') ?></th>
-			<th><?php _e('Actions', 'yast') ?></th>
+			<th scope="col" class="column-title">
+			    <span class="dashicons dashicons-sos"></span>
+			    <span class="column-label"><?php _e('Title', 'yast') ?></span>
+			</th>
+			<th scope="col" class="column-ticket-info">
+			    <span class="dashicons dashicons-tag"></span>
+			    <span class="column-label"><?php _e('Type', 'yast') ?></span>
+			</th>
+			<th scope="col" class="column-ticket-info">
+			    <span class="dashicons dashicons-admin-links"></span>
+			    <span class="column-label"><?php _e('Page', 'yast') ?></span>
+			</th>
+			<th scope="col" class="column-priority">
+			    <span class="dashicons dashicons-info"></span>
+			    <span class="column-label"><?php _e('Priority', 'yast') ?></span>
+			</th>
+			<th scope="col" class="column-ticket-info">
+			    <span class="dashicons dashicons-admin-users"></span>
+			    <span class="column-label"><?php _e('Assigned', 'yast') ?></span>
+			</th>
+			<th scope="col" class="column-ticket-info">
+			    <span class="dashicons dashicons-admin-users"></span>
+			    <span class="column-label"><?php _e('User', 'yast') ?></span>
+			</th>
+			<th scope="col" class="column-date">
+			    <span class="dashicons dashicons-calendar"></span>
+			    <span class="column-label"><?php _e('Date', 'yast') ?></span>
+			</th>
+			<th scope="col" class="column-comments">
+			    <span class="dashicons dashicons-format-chat" title="<?php _e('Answers', 'yast') ?>"></span>
+			</th>
+			<th scope="col" class="column-time">
+			    <?php echo  (is_super_admin() ? '<span class="dashicons dashicons-backup" title="'.__('Spent time', 'yast').'"></span>' : '') ?>
+			</th>
+			<th scope="col" class="column-status">
+			    <span class="dashicons dashicons-admin-generic"></span>
+			    <span class="column-label"><?php _e('Actions', 'yast') ?></span>
+			</th>
 		    </tr>
 		</thead>
 		<tbody>
@@ -687,16 +741,13 @@ class YAST_class {
 		    while ($tickets->have_posts()):
 			$tickets->the_post();
 			$ticket = $this->get_ticket(get_the_ID());
-			$types = get_the_terms($ticket->ID, 'ticket_type');
-			if (!$types){
-			    $types = array();
-			}
+			$paged = (false!== $paged = \filter_input(INPUT_GET, 'paged'))?$paged:1;
 			$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&referer=' . urlencode('admin.php?page=yast_list&post_status=' . $status . '&paged=' . $paged);
 			$referer = ('admin.php?page=yast_list&post_status=' . $status . '&paged=' . $paged);
 			$count = count(get_comments(array('post_id' => $ticket->ID)));
 			?>
 	    	    <tr class="yast_<?php echo  $ticket->post_status; ?> yast_<?php echo  $ticket->visibility ?> yast_<?php echo  ($count > 0 ? 'active' : 'waiting') ?>">
-			<td>
+			<td class="column-title">
 			    <a href="<?php echo  $link ?>"><span class="dashicons dashicons-edit"></span>
 				    <?php
 				    if('' === get_the_title()){
@@ -707,24 +758,19 @@ class YAST_class {
 				    }
 				    ?>
 			    </a>
-			</td>
-	    		<td><?php
-		    foreach ($types as $type) {
-			echo $type->name . ' ';
-		    }
-		    ?></td>
-	    		<td><a href="<?php echo  $ticket->page['url'] ?>" target="_blank"><?php echo  substr($ticket->page['url'], 0, 20) . '...' ?></a></td>
-	    		<td><span style="color:<?php echo  $levels[$ticket->priority]['color'] ?>;"><?php echo  $levels[$ticket->priority]['name'] ?></span></td>
-	    		<td><?php echo  $this->display_user($ticket->assignedto) ?></td>
-	    		<td><?php echo  $this->display_user($ticket->reporter) ?></td>
-	    		<td><?php the_date(); ?></td>
-	    		<td align="center"><?php echo $count ?></td>
-	    		<td><?php echo  str_replace(' ','&nbsp;',$this->human_spent_time($this->total_spent_time($ticket->ID), 'small')) ?></td>
-	    		<td><?php echo  __(ucfirst($ticket->post_status), 'yast'); ?></td>
-			<td><?php if ($ticket->visibility == 'private'): ?>
+			    <?php if ($ticket->visibility == 'private'): ?>
 				    <span class="yast_icon yast_icon-private" title="<?php _e('Private', 'yast'); ?>">P</span>
-	    <?php endif; ?></td>
-	    		<td>
+			    <?php endif; ?>
+			</td>
+	    		<td class="column-ticket-info"><?php echo $ticket->type_display ?></td>
+	    		<td class="column-ticket-info"><a href="<?php echo  $ticket->page['url'] ?>" target="_blank"><?php echo  substr($ticket->page['url'], 0, 20) . '...' ?></a></td>
+	    		<td class="column-priority"><span style="color:<?php echo  $levels[$ticket->priority]['color'] ?>;"><?php echo  $levels[$ticket->priority]['name'] ?></span></td>
+	    		<td class="column-ticket-info"><?php echo  $this->display_user($ticket->assignedto) ?></td>
+	    		<td class="column-ticket-info"><?php echo  $this->display_user($ticket->reporter) ?></td>
+	    		<td class="column-date"><?php the_date(); ?></td>
+	    		<td  class="column-comments"><?php echo $count ?></td>
+	    		<td class="column-time"><?php echo  str_replace(' ','&nbsp;',$this->human_spent_time($this->total_spent_time($ticket->ID), 'small')) ?></td>
+	    		<td class="column-status">
 	    		    <div class="yast_actions">
 	    <?php if ($ticket->post_status != 'closed') : ?>
 					<form action="admin-post.php" method="post" class="yast_formbutton yast_close">
@@ -760,9 +806,17 @@ class YAST_class {
 	<?php endwhile; ?>
 		</tbody>
 	    </table>
-	    <div id="yast_stat">
-
-	    </div>
+	    <table class="widefat tickets">
+		<tfoot>
+		    <tr>
+			<td>
+			    <nav>
+				<?php $this->liste_paginate($tickets); ?>
+			    </nav>
+			</td>
+		    </tr>
+		</tfoot>
+	    </table>
 	</div>
 	<?php
 	if (is_multisite()){
@@ -1218,7 +1272,7 @@ class YAST_class {
 	global $YAST_tools;
 	if (isset($_GET['confirm']) && $_GET['confirm'] == 'options_saved') {
 	    ?>
-	    <div class="updated" id="yast_options_confirm"><strong><?php _e('YAST Support-Tickets options saved !', 'yast') ?></strong></div>
+	<div class="updated" id="yast_options_confirm"><p><strong><?php _e('YAST Support-Tickets options saved !', 'yast') ?></strong></p></div>
 	    <?php
 	}
 	$yast_options = $this->options;
@@ -1236,22 +1290,22 @@ class YAST_class {
 		<?php wp_nonce_field('ticket_set_options', 'ticket_set_options'); ?>
 		<table>
 		    <tr>
-			<td colspan="2"><h3><?php _e('Alerts', 'yast'); ?></h3></td>
+			<td colspan="2"><h3><span class="dashicons dashicons-email-alt"> </span> <?php _e('Alerts', 'yast'); ?></h3></td>
 		    </tr>
 		    <tr>
 			<td><label for="alert_emails">
 			    <?php _e('Send email alert to:', 'yast') ?></label>
 			</td>
-			<td><input type="text" name="yast_options[alert_emails]" id="alert_emails" value="<?php echo implode(',', $yast_options['alert_emails']); ?>" /></td>
+			<td><input type="text" name="yast_options[alert_emails]" id="alert_emails" class="widefat" value="<?php echo implode(',', $yast_options['alert_emails']); ?>" /></td>
 		    </tr>
 		    <tr>
-			<td colspan="2"><h3><?php _e('Support Form', 'yast'); ?></h3></td>
+			<td colspan="2"><h3><span class="dashicons dashicons-sos"> </span> <?php _e('Support Form', 'yast'); ?></h3></td>
 		    </tr>
 		    <tr>
 			<td><label for="default_type">
 			    <?php _e('Ticket type to use in adminbar', 'yast') ?></label>
 			</td>
-			<td><select name="yast_options[default_type]" id="default_type">
+			<td><select name="yast_options[default_type]" id="default_type" class="widefat">
 			    <option value=''></option>
 		<?php foreach ($this->types as $type) { ?>
 	    		    <option value='<?php echo  $type->slug ?>' <?php
@@ -1267,8 +1321,8 @@ class YAST_class {
 			    <?php _e('Force SSL', 'yast') ?></label>
 			</td>
 			<td><select name="yast_options[force_ssl]" id="force_ssl">
-			    <option value='0' <?php echo  ($yast_options['force_ssl'] == 0 ? 'selected' : '') ?>><?php _e('No', 'yast') ?></option>
-			    <option value='1' <?php echo  ($yast_options['force_ssl'] == 1 ? 'selected' : '') ?>><?php _e('Yes', 'yast') ?></option>
+			    <option value='0' <?php echo  ($yast_options['force_ssl'] == 0 ? 'selected' : '') ?>><?php _e('Nope', 'yast') ?></option>
+			    <option value='1' <?php echo  ($yast_options['force_ssl'] == 1 ? 'selected' : '') ?>><?php _e('Yope', 'yast') ?></option>
 			</select>
 			</td>
 		    </tr>
@@ -1276,7 +1330,7 @@ class YAST_class {
 			<td><label for="trusted_hosts">
 			    <?php _e('Trusted hosts', 'yast') ?></label>
 			</td>
-			<td><textarea name="yast_options[trusted_hosts]" id="trusted_hosts" cols="60"><?php echo implode("\n", $yast_options['trusted_hosts']) ?></textarea>
+			<td><textarea name="yast_options[trusted_hosts]" id="trusted_hosts" cols="60" class="widefat"><?php echo implode("\n", $yast_options['trusted_hosts']) ?></textarea>
 			    <br><?php _e('One host per line, without http://, Datas sent from these sites will be registered without verification', 'yast') ?><br>
 			    <?php _e('To integrate a form in one of these sites, use one the following codes. YOu can customize form by changing the URL parameters.','yast') ?><br>
 			    <textarea cols="60" readonly>
@@ -1286,20 +1340,20 @@ class YAST_class {
 <!-- Custom YAST Form  -->
 <script src="<?php echo admin_url('admin-ajax.php') ?>?action=yast_form_js&autoload=no&visibility=private&username=anonymous&type=bug&title=Help%20I%20need%20somebody"></script>
 			    </textarea><br>
-			    <a href="https://wordpress.org/plugins/yast-yet-another-support-tool/" target="_blank"><?php _e('Click here to see more documentation about this feature.','yast') ?></a>
+			    <a href="https://wordpress.org/plugins/yast-yet-another-support-tool/#external" target="_blank"><?php _e('Click here to see more documentation about this feature.','yast') ?></a>
 			</td>
 		    </tr>
 
 
 		    <?php if (is_multisite()): ?>
 		    <tr>
-			<td colspan="2"><h3><?php _e('Multisite', 'yast'); ?></h3></td>
+			<td colspan="2"><h3><span class="dashicons dashicons-networking"> </span> <?php _e('Multisite', 'yast'); ?></h3></td>
 		    </tr>
 		    <tr>
 			<td><label for="support_site">
 			<?php _e('Use this site as Support site', 'yast') ?></label>
 			</td>
-			<td><select id="support_site" name="yast_options[support_site]">
+			<td><select id="support_site" name="yast_options[support_site]" class="widefat">
 			    <?php
 			    $blogs_list = wp_get_sites(array('limit' => 0, 'deleted' => false, 'archived' => false, 'spam' => false));
 			    foreach ($blogs_list as $blog):
@@ -1313,7 +1367,7 @@ class YAST_class {
 		    <?php endif; ?>
 
 		    <tr>
-			<td colspan="2"><h3><?php _e('Displaying', 'yast'); ?></h3></td>
+			<td colspan="2"><h3><span class="dashicons dashicons-admin-appearance"> </span> <?php _e('Displaying', 'yast'); ?></h3></td>
 		    </tr>
 		    <tr>
 			<td><label for="display_single_in_theme">
@@ -1438,7 +1492,10 @@ class YAST_class {
 	if (is_object($post)) {
 	    $post->navigator = get_post_meta($post->ID, 'navigator', true);
 	    $post->page = get_post_meta($post->ID, 'page', true);
-	    $post->priority = get_post_meta($post->ID, 'priority', true);
+	    if(!is_array($post->page)){
+		$post->page=array('url'=>'','post'=>'');
+	    }
+	    $post->priority = (int) get_post_meta($post->ID, 'priority', true);
 	    $post->reporter = get_post_meta($post->ID, 'reporter', true);
 	    $post->assignedto = get_post_meta($post->ID, 'assigned', true);
 	    $post->assigned = $this->assigned($post->ID);
@@ -1455,6 +1512,15 @@ class YAST_class {
 	    }
 	    $post->front_link = add_query_arg(array('token'=>$post->token),$post->guid);
 	    $post->lien = is_user_logged_in() ? admin_url() . 'admin.php?page=yast_list&ticket=' . $post->ID . '&referer=admin.php%3Fpage%3Dyast_list' : $post->guid;
+
+	    $types_to_display=array();
+	    $types = get_the_terms($post->ID, 'ticket_type');
+	    if ($types){
+		foreach ($types as $type) {
+		    $types_to_display[]=(!empty($type->parent)?get_term($type->parent,'ticket_type')->name.'/':'').$type->name;
+		}
+	    }
+	    $post->type_display = implode(', ',$types_to_display);
 
 	    $this->cache[$post_id] = $post;
 	    return $post;
@@ -1774,7 +1840,7 @@ Issue link : %12$s', 'yast'),
 		$this->mailfrom = 'noreply-yast@' . $siteurl;
 		$this->mailfromName = 'Ticket ' . $siteurl;
 		foreach ($dests as $dest) {
-		    wp_mail($dest, sprintf(__('[Support Ticket] #%d', 'yast'), $ticket->ID), sprintf(__('A new comment has been posted by %4$s.
+		    wp_mail($dest, sprintf(__('[Support Ticket][%1$s] #%2$d %3$s', 'yast'),$ticket->type_display, $ticket->ID,$ticket->post_title), sprintf(__('A new comment has been posted by %4$s.
 Subject: %1$s
 Comment:
 %2$s
@@ -2086,7 +2152,7 @@ Issue link : %3$s
 
 	    $dests = $this->comment_dests($ticket);
 
-	    $msg_mail = sprintf(__('[Support Ticket] New ticket report from %1$s (%2$s)
+	    $msg_mail = sprintf(__('[Support Ticket][%4$s] #13$d %3$s
 
 Subject: %3$s
 Type : %4$s
@@ -2106,10 +2172,10 @@ Regards,
 The website %11$s
 
 Issue link : %12$s', 'yast'),
-		    $current_user->user_nicename,
+		    $reporter,
 		    $current_user->user_email,
-		    $datas['post_title'],
-		    sanitize_text_field($_REQUEST['type']),
+		    $ticket->post_title,
+		    $ticket->type_display,
 		    $level['name'],
 		    $datas['post_content'],
 		    date_i18n(get_option('date_format').', '.get_option('time_format')),
@@ -2117,7 +2183,8 @@ Issue link : %12$s', 'yast'),
 		    wp_kses_post($_REQUEST['page_post']),
 		    $this->human_nav_info($_REQUEST['navigator_userAgent']),
 		    get_bloginfo('name'),
-		    $ticket->front_link
+		    $ticket->front_link,
+		    $ticket->ID
 	    );
 
 	    $confirm_message = __("Report succesfully registered !", 'yast');
@@ -2127,12 +2194,16 @@ Issue link : %12$s', 'yast'),
 	    $this->mailpriority = (4 - $ticket->priority);
 	    $this->mailfrom = 'noreply-yast@' . $siteurl;
 	    $this->mailfromName = 'Ticket ' . $siteurl;
+	    $sent=false;
 	    foreach($dests as $dest){
 		if (wp_mail(
-				$dest, sprintf(__('[Support Ticket] #%d', 'yast'), $ticket_id), $msg_mail
+				$dest, sprintf(__('[Support Ticket][%s] #%d %s', 'yast'), $ticket->type_display,$ticket_id, $ticket->post_title), $msg_mail
 			)) {
-		    $confirm_message.="\n" . __("An e-mail has been sent", 'yast');
+		    $sent=true;
 		}
+	    }
+	    if($sent){
+		$confirm_message.="\n" . __("An e-mail has been sent", 'yast');
 	    }
 
 
@@ -2568,7 +2639,7 @@ contentLoaded(window, function(event) {
 	}
 	$admin_bar->add_menu(array(
 	    'id' => 'yast_support_tickets',
-	    'title' => '<span class="ab-icon"></span> <span class="ab-label">' . $tickets->post_count . '</span>',
+	    'title' => '<span class="ab-icon dashicons dashicons-sos"></span> <span class="ab-label">' . $tickets->post_count . '</span>',
 	    'href' => admin_url() . 'admin.php?page=yast_list',
 	    'meta' => array(
 		'title' => __('Support Tickets', 'yast'),
@@ -2583,7 +2654,7 @@ contentLoaded(window, function(event) {
 		'meta' => array(
 		    'title' => __('Contact technical support', 'yast'),
 		    //'onclick' => 'openbox("Contacter le support", 1)',
-		    'html' => '<a href="#TB_inline?width=600&height=400&inlineId=report_ticketbox" class="thickbox"><span class="ab-icon"></span> <span class="ab-label">' . __('Support !', 'yast') . '</span></a>',
+		    'html' => '<a href="#TB_inline?width=600&height=400&inlineId=report_ticketbox" class="thickbox"><span class="ab-icon dashicons dashicons-sos"></span> <span class="ab-label">' . __('Support !', 'yast') . '</span></a>',
 		),
 	    ));
 	}

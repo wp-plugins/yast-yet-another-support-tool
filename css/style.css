@@ -117,7 +117,44 @@
 #yast_assigned, #yast_reassigne{
     display:none;
 }
-/*****************************/
+/** LIST ***************************/
+.tickets .column-title{
+    width:20%;
+}
+.tickets .column-status{
+   width:60px;
+}
+.tickets tfoot td, .tickets .column-comments,.tickets .column-time,.tickets .column-priority{
+   white-space: nowrap;
+   text-align: center;
+}
+.tickets .column-comments,.tickets .column-time,.tickets td.column-priority{
+   width:30px;
+}
+.tickets th, .tickets td.column-ticket-info{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media screen and (max-width: 1100px) {
+    .tickets .column-ticket-info, .tickets .column-label{
+        display:none;
+    }
+    .tickets .column-date{
+        width:20%;
+    }
+    .tickets .column-priority{
+        width:60px;
+    }
+    .tickets .column-title{
+        width:40%;
+    }
+}
+@media screen and (max-width: 782px) {
+    .tickets .column-title{
+        width:60%;
+    }
+}
 #yasts_list tr td{
     border-bottom:#E3E3E3 0.5px solid;
 }
@@ -146,14 +183,6 @@
     font-weight:100;
 }
 
-/****************************/
-
-#icon-yast{
-    background-image:url(../img/ticket.png);
-}
-#wp-admin-bar-ticket_tickets .ab-icon{
-    background-image:url(../img/ticket-bar.png);
-}
 
 /*****************************/
 #yast_comment, #ticket_comments .comment-reply-link, #ticket_comments .comment-edit-link{
@@ -326,9 +355,5 @@
 #adminmenu #toplevel_page_yast_list .menu-icon-generic div.wp-menu-image:before,
 #wpadminbar #wp-admin-bar-yast_support_tickets .ab-icon:before {
     content: '\e801';
-    top: 1px;
-}
-#wpadminbar #wp-admin-bar-ticket_report .ab-icon:before {
-    content: "";
     top: 1px;
 }
