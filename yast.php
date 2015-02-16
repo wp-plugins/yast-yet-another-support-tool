@@ -3,7 +3,7 @@
   Plugin Name: YAST : Yet Another Support Tool
   Plugin URI: http://ecolosites.eelv.fr/yast/
   Description: Support Tickets management, throw classic site, multisite plateform or external server
-  Version: 1.2.0
+  Version: 1.2.1
   Author: bastho, n4thaniel, ecolosites
   Author URI: http://ecolosites.eelv.fr/
   License: GPLv2
@@ -323,6 +323,15 @@ class YAST_class {
 	    return;
 	}
 	$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&referer=' .esc_url(urlencode($_GET['referer']));
+	$return_link = false;
+	if (isset($_GET['_wp_http_referer'])){
+	    $return_link = urldecode(wp_get_referer());
+	    $p_return_link = parse_url($return_link);
+	    $pos = strpos($p_return_link['query'],'_wp_http_referer');
+	    if(substr($p_return_link['query'],0,22)=='page=yast_list&ticket=' && (-1 < $pos)){
+		$return_link = substr($p_return_link['query'],$pos+17);
+	    }
+	}
 	if(!is_admin()){
 	    $this->scripts_admin();
 	}
@@ -335,8 +344,8 @@ class YAST_class {
 		<?php endif; ?>
 	    </h2>
 	    <div  id="poststuff">
-	<?php if (isset($_GET['referer'])): ?>
-	    	<a href="<?php echo  esc_url($_GET['referer']) ?>">&laquo; <?php _e('Back to support tickets list', 'yast'); ?></a>
+	<?php if ($return_link): ?>
+		<a href="<?php echo $return_link ?>">&laquo; <?php _e('Back to support tickets list', 'yast'); ?></a>
 	<?php endif; ?>
 		<h1><?php echo  $ticket->post_title ?></h1>
 		<div class="postbox" id="ticket_content">
@@ -391,7 +400,6 @@ class YAST_class {
 	    		<form action="<?php echo admin_url() ?>admin-post.php?token=<?php echo $ticket->token ?>" method="post" id="yast_comment">
 				<?php wp_nonce_field('ticket_comment', 'ticket_comment'); ?>
 	    		    <input type="hidden" name="action" value="yastupdate">
-	    		    <input type="hidden" name="referer" value="<?php echo  esc_url($_GET['referer'] . '#sent') ?>">
 	    		    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 					<?php if (is_super_admin()): ?>
 			    <div>
@@ -422,6 +430,9 @@ class YAST_class {
 		</div>
 
 		<div class="yast_actions">
+		    <?php if ($return_link): ?>
+			<a href="<?php echo  $return_link ?>" class="button"><?php _e('Cancel', 'yast'); ?></a>
+		    <?php endif; ?>
 		    <?php $this->single_action_button($ticket->ID,'trash',__('Delete this ticket ?', 'yast')) ?>
 		    <?php if ($ticket->post_status != 'closed'){
 			$this->single_action_button($ticket->ID,'closed',__('Close this ticket ?', 'yast'));
@@ -451,7 +462,7 @@ class YAST_class {
 	    <form action="<?php echo admin_url() ?>admin-post.php?token=<?php echo $ticket->token ?>" method="post" id="<?php echo $status?>" class="yast_<?php echo $status?>">
 		<?php wp_nonce_field($nonce, $nonce); ?>
 		<input type="hidden" name="action" value="yastupdate">
-		<input type="hidden" name="referer" value="<?php echo (\filter_input(INPUT_GET,'referer',FILTER_SANITIZE_URL)?:'') ?>">
+		<input type="hidden" name="_wp_http_referer" value="<?php echo (\filter_input(INPUT_GET,'_wp_http_referer',FILTER_SANITIZE_URL)?:'') ?>">
 		<input type="hidden" name="ticket" value="<?php echo $ticket_id ?>">
 		<input type="hidden" name="post_status" value="<?php echo $status?>">
 		<input type="submit" value="<?php echo $label ?>" class="button button-<?php echo $style ?> btn btn-<?php echo $style ?>">
@@ -645,7 +656,7 @@ class YAST_class {
 	    <div class="icon32" id="icon-yast"><br></div>
 	    <h2><?php _e('Support Tickets', 'yast'); ?></h2>
 
-	    <table class="widefat tickets">
+	    <table class="widefat tickets tickets-filter">
 		<tr>
 		    <td>
 			<form action="" method="get">
@@ -679,7 +690,7 @@ class YAST_class {
 			<?php $this->liste_paginate($tickets); ?>
 			</nav>
 		    </td>
-		    <td align="right">
+		    <td align="right" class="column-ticket-info">
 	<?php if (is_super_admin()) : ?>
 	    		<a href="#TB_inline?width=600&height=400&inlineId=report_ticketbox" class="thickbox button button-primary">
 			    <span class="dashicons dashicons-plus"> </span>
@@ -742,8 +753,8 @@ class YAST_class {
 			$tickets->the_post();
 			$ticket = $this->get_ticket(get_the_ID());
 			$paged = (false!== $paged = \filter_input(INPUT_GET, 'paged'))?$paged:1;
-			$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&referer=' . urlencode('admin.php?page=yast_list&post_status=' . $status . '&paged=' . $paged);
-			$referer = ('admin.php?page=yast_list&post_status=' . $status . '&paged=' . $paged);
+			$link = 'admin.php?page=yast_list&ticket=' . $ticket->ID . '&_wp_http_referer=' . urlencode(wp_unslash( $_SERVER['REQUEST_URI']));//urlencode('admin.php?page=yast_list&post_status=' . $status . '&paged=' . $paged);
+			$referer = ('admin.php?page=yast_list&post_status=' . $status . '&ticket_type='.$ticket_type.'&paged=' . $paged);
 			$count = count(get_comments(array('post_id' => $ticket->ID)));
 			?>
 	    	    <tr class="yast_<?php echo  $ticket->post_status; ?> yast_<?php echo  $ticket->visibility ?> yast_<?php echo  ($count > 0 ? 'active' : 'waiting') ?>">
@@ -776,7 +787,7 @@ class YAST_class {
 					<form action="admin-post.php" method="post" class="yast_formbutton yast_close">
 					<?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 					    <input type="hidden" name="action" value="yastupdate">
-					    <input type="hidden" name="referer" value="<?php echo  $referer ?>">
+					    <input type="hidden" name="_wp_http_referer" value="<?php echo  $referer ?>">
 					    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 					    <input type="hidden" name="post_status" value="closed">
 					    <input type="submit" value="C" title="<?php _e('Close', 'yast'); ?>">
@@ -785,7 +796,7 @@ class YAST_class {
 					<form action="admin-post.php" method="post" class="yast_formbutton yast_open">
 					<?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 					    <input type="hidden" name="action" value="yastupdate">
-					    <input type="hidden" name="referer" value="<?php echo  $referer ?>">
+					    <input type="hidden" name="_wp_http_referer" value="<?php echo  $referer ?>">
 					    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 					    <input type="hidden" name="post_status" value="open">
 					    <input type="submit" value="O" title="<?php _e('Re-Open', 'yast'); ?>">
@@ -794,7 +805,7 @@ class YAST_class {
 	    			<form action="admin-post.php" method="post" class="yast_formbutton yast_delete">
 	    <?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 	    			    <input type="hidden" name="action" value="yastupdate">
-	    			    <input type="hidden" name="referer" value="<?php echo  $referer ?>">
+	    			    <input type="hidden" name="_wp_http_referer" value="<?php echo  $referer ?>">
 	    			    <input type="hidden" name="ticket" value="<?php echo  $ticket->ID ?>">
 	    			    <input type="hidden" name="post_status" value="trash">
 	    			    <input type="submit" value="X" title="<?php _e('Delete', 'yast'); ?>">
@@ -818,6 +829,9 @@ class YAST_class {
 		</tfoot>
 	    </table>
 	</div>
+	<a href="#TB_inline?width=600&height=400&inlineId=report_ticketbox" class="thickbox button button-primary" id="yast-add-mobile">
+	    <span class="dashicons dashicons-plus"> </span>
+	</a>
 	<?php
 	if (is_multisite()){
 	    restore_current_blog();
@@ -924,7 +938,7 @@ class YAST_class {
 	    	</select>
 	        </label>
 		<p>
-		<a href="admin.php?page=yast_list&ticket=<?php echo $post->ID?>&referer=admin.php%3Fpage%3Dyast_list"><?php _e('Go back to ticket', 'yast') ?></a>
+		<a href="admin.php?page=yast_list&ticket=<?php echo $post->ID?>&_wp_http_referer=<?php echo urlencode(wp_get_referer()) ?>"><?php _e('Go back to ticket', 'yast') ?></a>
 		</p>
 	    </div>
 	    <?php
@@ -1511,7 +1525,7 @@ class YAST_class {
 		update_post_meta($post->ID, 'token', $post->token);
 	    }
 	    $post->front_link = add_query_arg(array('token'=>$post->token),$post->guid);
-	    $post->lien = is_user_logged_in() ? admin_url() . 'admin.php?page=yast_list&ticket=' . $post->ID . '&referer=admin.php%3Fpage%3Dyast_list' : $post->guid;
+	    $post->lien = is_user_logged_in() ? admin_url() . 'admin.php?page=yast_list&ticket=' . $post->ID . '&_wp_http_referer=admin.php%3Fpage%3Dyast_list' : $post->guid;
 
 	    $types_to_display=array();
 	    $types = get_the_terms($post->ID, 'ticket_type');
@@ -1952,9 +1966,9 @@ Issue link : %3$s
 	}
 	$redirect_args = array(
 		    'confirm_reply'=>true,
-		    'referer'=>esc_url($_POST['referer'])
+		    '_wp_http_referer'=>urlencode($_REQUEST['_wp_http_referer'])
 		);
-	$link = add_query_arg($redirect_args,esc_url($_REQUEST['_wp_http_referer']));
+	//$link = add_query_arg($redirect_args,esc_url($_REQUEST['_wp_http_referer']));
 	if (isset($_POST['message']) && trim(strip_tags($_POST['message'])) != '') {
 	    if (!isset($_POST['ticket_comment']) || !wp_verify_nonce($_POST['ticket_comment'], 'ticket_comment')) {
 		wp_die(__('Security error', 'yast'));
@@ -1972,7 +1986,8 @@ Issue link : %3$s
 			    'confirm' => false,
 			    'spent_time' => isset($_POST['spent_time']) ? abs($_POST['spent_time']) : 0,
 		));
-		wp_redirect($link . '&confirm_reply#yast_comment_link');
+		$link = add_query_arg($redirect_args,$_SERVER['HTTP_REFERER']);
+		wp_redirect($link . '#yast_comment_link');
 		exit;
 	    }
 	}
@@ -2007,7 +2022,7 @@ Issue link : %3$s
 		);
 		unset($redirect_args['confirm_reply']);
 		$redirect_args['alert']=$_POST['post_status'];
-		$link = add_query_arg($redirect_args,$link);
+		$link = add_query_arg($redirect_args,$_SERVER['HTTP_REFERER']);
 		wp_redirect($link);
 		exit;
 	    }

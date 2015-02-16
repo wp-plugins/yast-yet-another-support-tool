@@ -135,6 +135,10 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.2.1 =
+* [Edit] Better redirections after actions
+* [AdminBar] Make support form visible on mobile
+
 = 1.2.0 =
 * [List] filter by ticket type
 * [List] better responsiveness
