@@ -135,6 +135,13 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.3.0 =
+* [UI] Add "auto spent time" and "comment and close"
+* [UI] Add submenus for ticket types in the admin bar
+* [UI] Add ticket types post count
+* [Form] Add search in existing tickets while typing a new title
+* [Code] Make code more readable
+
 = 1.2.1 =
 * [Edit] Better redirections after actions
 * [AdminBar] Make support form visible on mobile

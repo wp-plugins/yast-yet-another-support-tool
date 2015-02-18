@@ -9,9 +9,12 @@ function yast_realtime(){
     else if(dif>60) realtime= Math.floor(dif/60)+' '+yast.locale.minutes+' '+Math.round(((dif/60)-Math.floor(dif/60))*60)+' '+yast.locale.seconds;
     else realtime= dif+' '+yast.locale.seconds;
     //realtime+=' ('++' '+yast.locale.minutes+')';
-    jQuery('#yast_realtime').html(realtime).click(function(){
+    jQuery('#yast_realtime').html(realtime).unbind('click').click(function(){
         jQuery('#spent_time_text').val(Math.ceil(dif/60));
     });
+    if(jQuery('#autospent').is(':checked')){
+        jQuery('#spent_time_text').val(Math.ceil(dif/60));
+    }
     setTimeout('yast_realtime()',1000);
 }
 

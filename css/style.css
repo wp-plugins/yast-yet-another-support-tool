@@ -50,7 +50,7 @@
 }
 
 
-
+/* SUBMIT FORM **********************/
 #report_ticketbox{
     display:none;
 }
@@ -71,6 +71,9 @@
     text-decoration: underline;
     font-style: italic;
     color:#06C;
+}
+#ticketrep_search_results tr.status-closed td{
+    font-weight:900;
 }
 /***********************/
 .yast_user{
@@ -118,6 +121,9 @@
     display:none;
 }
 /** LIST ***************************/
+#yast-add-mobile{
+    display: none;
+}
 .tickets .column-title{
     width:20%;
 }
@@ -148,6 +154,20 @@
     }
     .tickets .column-title{
         width:40%;
+    }
+    #yast-add-mobile{
+        display: block;
+        position: fixed;
+        bottom:5px;
+        right:5px;
+        width:50px;
+        height:50px;
+        border:none;
+        border-radius:25px;
+    }
+    #yast-add-mobile .dashicons{
+        font-size:25px;
+        line-height:1.5;
     }
 }
 @media screen and (max-width: 782px) {
@@ -207,6 +227,9 @@
     overflow: hidden;
     margin-top:-20px;
     float:left;
+}
+#ticket_comments .comment-author .avatar{
+    width:100%;
 }
 #ticket_comments .comment-author cite.fn{
     display: block;
@@ -356,4 +379,7 @@
 #wpadminbar #wp-admin-bar-yast_support_tickets .ab-icon:before {
     content: '\e801';
     top: 1px;
+}
+#wpadminbar #wp-admin-bar-ticket_report{
+    display:block;
 }

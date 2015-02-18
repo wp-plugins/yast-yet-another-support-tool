@@ -4,7 +4,7 @@ if(!have_posts()){
     wp_die(__('Not ticket here, this is an error...','yast'));
 }
 the_post();
-if($_YAST->options['display_single_in_theme']){
+if($_YAST->options['display_single_in_theme']=='yope'){
     get_header();
 }
 else{
@@ -34,7 +34,7 @@ else{
 
 	</div>
 <?php
-if($_YAST->options['display_single_in_theme']){
+if($_YAST->options['display_single_in_theme']=='yope'){
     get_footer();
 }
 else{
