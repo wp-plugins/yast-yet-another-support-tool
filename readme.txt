@@ -135,6 +135,9 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 == Changelog ==
 
+= 1.3.1 =
+* [BUG] Fix bad nonce_field name in single page
+
 = 1.3.0 =
 * [UI] Add "auto spent time" and "comment and close"
 * [UI] Add submenus for ticket types in the admin bar

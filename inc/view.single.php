@@ -86,7 +86,7 @@ if (!is_admin()) {
 			<a id="yast_comment_link" class="button button-primary btn btn-sm btn-primary"><?php _e('Reply to this ticket', 'yast') ?></a>
 			<form action="<?php echo admin_url() ?>admin-post.php?token=<?php echo $ticket->token ?>" method="post" id="yast_comment">
 	<?php wp_nonce_field('ticket_comment', 'ticket_comment'); ?>
-			    <?php wp_nonce_field('ticket_status', 'ticket_comment'); ?>
+			    <?php wp_nonce_field('ticket_status', 'ticket_status'); ?>
 			    <input type="hidden" name="action" value="yastupdate">
 			    <input type="hidden" name="ticket" value="<?php echo $ticket->ID ?>">
 				    <?php if (is_super_admin()): ?>
