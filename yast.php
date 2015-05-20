@@ -26,6 +26,7 @@ class YAST_class {
     public $options;
     public $options_params;
     public $cache;
+    public $plugin_url;
 
     /*
      * Initialize plugin
@@ -40,6 +41,7 @@ class YAST_class {
 	$this->options_params=$this->get_conf_params();
 	$this->options = $this->get_conf();
 	$this->cache=array();
+	$this->plugin_url = plugins_url('', __FILE__);
 
 	include_once (plugin_dir_path(__FILE__) . 'inc/hooks.php');
 
@@ -747,7 +749,7 @@ class YAST_class {
 	    $post->spent_time = get_post_meta($post->ID, 'spent_time', true);
 	    $post->token = get_post_meta($post->ID, 'token', true);
 	    if (empty($post->token)){
-		$post->token = sha1($post_id.time().rand(0,128));
+		$post->token = sha1($post->ID.time().rand(0,128));
 		update_post_meta($post->ID, 'token', $post->token);
 	    }
 	    $post->front_link = add_query_arg(array('token'=>$post->token),$post->guid);
@@ -1303,7 +1305,8 @@ class YAST_class {
 	if(!$this->crypt_support()){
 	    return $string;
 	}
-	$key = pack('H*', $this->options['local_token']);
+	$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+	$key = substr(pack('H*', $this->options['local_token']),0,$iv_size);
 
 
 	$ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key,
@@ -1323,7 +1326,7 @@ class YAST_class {
 	$iv_dec = substr($decoded_hash, 0, $iv_size);
 	$ciphertext_dec = substr($decoded_hash, $iv_size);
 
-	$key = pack('H*', $this->options['local_token']);
+	$key = substr(pack('H*', $this->options['local_token']),0,$iv_size);
 
 	return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key,
 					$ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec));

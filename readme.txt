@@ -137,6 +137,7 @@ No, this plugin intends to let admins hemp other user on a single or multi-site 
 
 = 1.3.1 =
 * [BUG] Fix bad nonce_field name in single page
+* [BUG] Fix bad reference in live search
 
 = 1.3.0 =
 * [UI] Add "auto spent time" and "comment and close"

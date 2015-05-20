@@ -33,7 +33,7 @@ var yast_body;
 var yast_Element;
 
 yast_cssLink = document.createElement("link");
-yast_cssLink.href = "<?php echo str_replace(array('http:','https:'),'',plugins_url('/css/style.css', __FILE__)) ?>";
+yast_cssLink.href = "<?php echo str_replace(array('http:','https:'),'',$this->plugin_url.'/css/style.css') ?>";
 yast_cssLink.setAttribute('rel', 'stylesheet');
 yast_cssLink.setAttribute('type', 'text/css');
 yast_cssLink.setAttribute('media', 'all');

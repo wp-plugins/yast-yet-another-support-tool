@@ -31,8 +31,6 @@ else {
     $description = wp_kses_post($_REQUEST['description']);
 }
 
-
-
 $datas['post_title'] = sanitize_text_field($_REQUEST['title']);
 $datas['post_content'] = $description;
 $datas['post_type'] = 'yast';
@@ -55,9 +53,21 @@ if (0 === $ticket_id = wp_insert_post($datas)) {
     exit;
 }
 else {
+    global $current_user;
+    get_currentuserinfo();
+
     $reporter = esc_attr($_REQUEST['reporter']);
     if (false !== $author = \filter_input(INPUT_POST, 'user')) {
-	$reporter = $this->decrypt($author);
+	if(is_super_admin()){
+	    $reporter = $author;
+	}
+	elseif(is_user_logged_in()){
+	    $reporter = $current_user->user_email;
+	}
+	else{
+	    $reporter = $this->decrypt($author);
+	    $current_user->user_email = $reporter;
+	}
     }
     $meta_page = array(
 	'url' => esc_url($_REQUEST['page_url']),
@@ -76,11 +86,7 @@ else {
     add_post_meta($ticket_id, 'reporter', $reporter);
     add_post_meta($ticket_id, 'visibility', esc_attr($_REQUEST['visibility']));
 
-
     wp_set_object_terms($ticket_id, array(esc_attr($_REQUEST['type'])), 'ticket_type');
-
-    global $current_user;
-    get_currentuserinfo();
 
     $level = $this->levels($_REQUEST['priority']);
 
@@ -130,7 +136,6 @@ Issue link : %12$s', 'yast'), $reporter, $current_user->user_email, $ticket->pos
     if ($sent) {
 	$confirm_message.="\n" . __("An e-mail has been sent", 'yast');
     }
-
 
     // We are on a Ticket server
     if ($this->is_server_request()) {
